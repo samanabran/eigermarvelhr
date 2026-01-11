@@ -104,17 +104,19 @@ export function JobCard({ job, matchScore, isPremium, onViewDetails, onApply, co
       <CardFooter className="flex gap-2">
         <Button 
           variant="outline" 
-          className="flex-1 text-xs sm:text-sm"
+          className="flex-1 text-xs sm:text-sm bg-gradient-to-r from-accent via-accent to-accent/90 text-black border-accent hover:from-accent/90 hover:via-accent hover:to-accent font-bold shadow-lg hover:shadow-accent/50 transition-all relative overflow-hidden group"
           onClick={() => onViewDetails(job.id)}
         >
-          View Details
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+          <span className="relative z-10">View Details</span>
         </Button>
         {onApply && (
           <Button 
-            className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90 font-semibold text-xs sm:text-sm"
+            className="flex-1 bg-gradient-to-r from-accent via-accent to-accent/90 text-black hover:from-accent/90 hover:via-accent hover:to-accent font-bold text-xs sm:text-sm shadow-lg hover:shadow-accent/50 transition-all relative overflow-hidden group"
             onClick={() => onApply(job.id)}
           >
-            Quick Apply
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+            <span className="relative z-10">Quick Apply</span>
           </Button>
         )}
       </CardFooter>
