@@ -22,7 +22,6 @@ const bundles = [
       'Automated HR workflows and compliance',
       'Guaranteed ROI within 90 days'
     ],
-    price: 'Starting from AED 35,000',
     color: 'from-accent/20 to-accent/5'
   },
   {
@@ -37,7 +36,6 @@ const bundles = [
       'Advanced analytics and reporting',
       '6-month placement guarantee'
     ],
-    price: 'Starting from AED 95,000',
     color: 'from-accent/30 to-accent/10',
     featured: true
   },
@@ -53,7 +51,6 @@ const bundles = [
       'AI-driven talent analytics',
       '12-month strategic partnership'
     ],
-    price: 'Starting from AED 200,000',
     color: 'from-accent/20 to-accent/5'
   }
 ]
@@ -97,17 +94,21 @@ export function TalentTechSection() {
 
   return (
     <>
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-secondary via-background to-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 relative overflow-hidden bg-primary">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary opacity-95" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full mb-4">
+            <div className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-2 rounded-full mb-4 border border-accent/30">
               <Lightning size={20} weight="fill" />
               <span className="text-sm font-semibold uppercase tracking-wide">Coming Soon</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               The Future of HR: Integrated Technology Solutions
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg text-white/90 max-w-3xl mx-auto">
               Eiger Marvel + SGC TECH AI - Combining elite recruitment with AI-native ERP solutions
             </p>
           </div>
@@ -118,49 +119,45 @@ export function TalentTechSection() {
               return (
                 <Card 
                   key={bundle.id}
-                  className={`relative overflow-hidden transition-all hover:shadow-xl ${
-                    bundle.featured ? 'border-2 border-accent shadow-lg' : ''
+                  className={`relative overflow-hidden transition-all hover:shadow-2xl hover:-translate-y-2 duration-300 bg-white/98 backdrop-blur-sm ${
+                    bundle.featured ? 'border-2 border-accent shadow-xl scale-105' : 'border border-border/50'
                   }`}
                 >
                   {bundle.featured && (
-                    <div className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full premium-badge">
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-accent to-accent/80 text-accent-foreground text-xs font-bold px-3 py-1 rounded-full premium-badge shadow-lg">
                       POPULAR
                     </div>
                   )}
                   
-                  <div className={`absolute inset-0 bg-gradient-to-br ${bundle.color} opacity-50`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${bundle.color} opacity-40 pointer-events-none`} />
                   
                   <CardHeader className="relative">
-                    <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
-                      <Icon size={28} weight="bold" className="text-accent" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-accent to-accent/70 rounded-xl flex items-center justify-center mb-4 shadow-md">
+                      <Icon size={32} weight="bold" className="text-accent-foreground" />
                     </div>
-                    <CardTitle className="text-xl font-bold">{bundle.title}</CardTitle>
-                    <CardDescription className="text-sm font-semibold">{bundle.subtitle}</CardDescription>
+                    <CardTitle className="text-xl font-bold text-foreground">{bundle.title}</CardTitle>
+                    <CardDescription className="text-sm font-semibold text-muted-foreground">{bundle.subtitle}</CardDescription>
                   </CardHeader>
 
                   <CardContent className="relative space-y-4">
                     <div>
-                      <h4 className="font-bold text-lg mb-2">{bundle.headline}</h4>
-                      <p className="text-sm text-muted-foreground">{bundle.value}</p>
+                      <h4 className="font-bold text-lg mb-2 text-foreground">{bundle.headline}</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{bundle.value}</p>
                     </div>
 
                     <div className="space-y-2">
                       {bundle.benefits.map((benefit, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <Check size={20} weight="bold" className="text-accent flex-shrink-0 mt-0.5" />
-                          <span className="text-sm">{benefit}</span>
+                          <span className="text-sm text-foreground">{benefit}</span>
                         </div>
                       ))}
-                    </div>
-
-                    <div className="pt-4 border-t">
-                      <p className="text-lg font-bold text-accent">{bundle.price}</p>
                     </div>
                   </CardContent>
 
                   <CardFooter className="relative">
                     <Button 
-                      className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold"
+                      className="w-full bg-gradient-to-r from-accent to-accent/90 text-accent-foreground hover:from-accent/90 hover:to-accent/80 font-semibold shadow-md hover:shadow-xl transition-all"
                       onClick={() => {
                         setSelectedBundle(bundle.id)
                         setShowWaitlist(true)
@@ -172,6 +169,12 @@ export function TalentTechSection() {
                 </Card>
               )
             })}
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-white/80 text-sm">
+              Transforming businesses across the MENA region with integrated talent and technology solutions
+            </p>
           </div>
         </div>
       </section>

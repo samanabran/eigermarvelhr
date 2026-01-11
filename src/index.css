@@ -7,40 +7,44 @@
   }
   
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
   }
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.185 0.035 255);
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.15 0 0);
   
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.185 0.035 255);
+  --card-foreground: oklch(0.15 0 0);
   
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.185 0.035 255);
+  --popover-foreground: oklch(0.15 0 0);
   
-  --primary: oklch(0.185 0.035 255);
+  --primary: oklch(0.15 0 0);
   --primary-foreground: oklch(1 0 0);
   
-  --secondary: oklch(0.96 0.002 255);
-  --secondary-foreground: oklch(0.185 0.035 255);
+  --secondary: oklch(0.17 0 0);
+  --secondary-foreground: oklch(1 0 0);
   
-  --muted: oklch(0.96 0.002 255);
-  --muted-foreground: oklch(0.45 0.015 255);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.50 0 0);
   
-  --accent: oklch(0.72 0.12 85);
-  --accent-foreground: oklch(0.185 0.035 255);
+  --accent: oklch(0.82 0.11 85);
+  --accent-foreground: oklch(0.15 0 0);
   
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
   
-  --border: oklch(0.89 0.002 255);
-  --input: oklch(0.89 0.002 255);
-  --ring: oklch(0.185 0.035 255);
+  --border: oklch(0.89 0 0);
+  --input: oklch(0.89 0 0);
+  --ring: oklch(0.82 0.11 85);
   
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 }
 
 @theme {
@@ -92,10 +96,29 @@
   }
 }
 
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes floatImage {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
 .premium-badge {
   animation: pulse-gold 2s ease-in-out infinite;
 }
 
 .match-score-reveal {
   animation: count-up 0.6s ease-out;
+}
+
+.gradient-gold-shine {
+  background: linear-gradient(90deg, oklch(0.78 0.11 85) 0%, oklch(0.87 0.13 85) 25%, oklch(0.92 0.15 85) 50%, oklch(0.87 0.13 85) 75%, oklch(0.78 0.11 85) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
 }

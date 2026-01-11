@@ -8,10 +8,13 @@ interface PremiumSectionProps {
 
 export function PremiumSection({ onUpgrade }: PremiumSectionProps) {
   return (
-    <section className="py-16 sm:py-20 bg-gradient-to-br from-accent/10 via-background to-accent/5">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-20 relative overflow-hidden bg-gradient-to-br from-accent/10 via-background to-accent/5">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-accent/80 text-accent-foreground px-4 py-2 rounded-full mb-4 shadow-lg">
             <CrownSimple size={20} weight="fill" />
             <span className="text-sm font-bold uppercase tracking-wide">Premium Membership</span>
           </div>
@@ -24,7 +27,7 @@ export function PremiumSection({ onUpgrade }: PremiumSectionProps) {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <Card>
+          <Card className="hover:shadow-lg transition-all">
             <CardContent className="p-6">
               <h3 className="text-lg font-bold mb-4">Free Membership</h3>
               <div className="space-y-3">
@@ -57,7 +60,8 @@ export function PremiumSection({ onUpgrade }: PremiumSectionProps) {
             </CardContent>
           </Card>
 
-          <Card className="border-2 border-accent shadow-xl relative overflow-hidden">
+          <Card className="border-2 border-accent shadow-2xl relative overflow-hidden hover:shadow-accent/20 hover:-translate-y-1 transition-all">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-accent/5" />
             <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-bl-full" />
             <CardContent className="p-6 relative">
               <div className="flex items-center gap-2 mb-4">
@@ -91,11 +95,11 @@ export function PremiumSection({ onUpgrade }: PremiumSectionProps) {
                 </div>
               </div>
               <div className="mt-6">
-                <div className="text-2xl font-bold text-accent mb-1">AED 299/month</div>
+                <div className="text-2xl font-bold gradient-gold-shine mb-1">AED 299/month</div>
                 <p className="text-xs text-muted-foreground">Average ROI within first placement</p>
               </div>
               <Button 
-                className="w-full mt-6 bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
+                className="w-full mt-6 bg-gradient-to-r from-accent to-accent/90 text-accent-foreground hover:from-accent/90 hover:to-accent/80 font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105"
                 onClick={onUpgrade}
               >
                 Upgrade to Premium
@@ -106,7 +110,7 @@ export function PremiumSection({ onUpgrade }: PremiumSectionProps) {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            Join <span className="font-bold text-accent">500+</span> premium members who landed their dream jobs faster
+            Join <span className="font-bold gradient-gold-shine">500+</span> premium members who landed their dream jobs faster
           </p>
         </div>
       </div>
