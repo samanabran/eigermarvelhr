@@ -1,14 +1,22 @@
 import { Badge } from '@/components/ui/badge'
+import companyLogo1 from '@/assets/images/company-logo.svg'
+import companyLogo2 from '@/assets/images/company-logo-2.svg'
+import companyLogo3 from '@/assets/images/company-logo-3.svg'
+import companyLogo4 from '@/assets/images/company-logo-4.svg'
+import companyLogo5 from '@/assets/images/company-logo-5.svg'
+import companyLogo6 from '@/assets/images/company-logo-6.svg'
+import companyLogo7 from '@/assets/images/company-logo-7.svg'
+import companyLogo8 from '@/assets/images/company-logo-8.svg'
 
 const companies = [
-  { name: 'Emirates Group', hiring: true, logo: 'https://logos-world.net/wp-content/uploads/2020/03/Emirates-Logo.png' },
-  { name: 'Emaar Properties', hiring: false, logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Emaar_Properties_logo.svg/2560px-Emaar_Properties_logo.svg.png' },
-  { name: 'Etisalat', hiring: true, logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Etisalat_logo.svg/2560px-Etisalat_logo.svg.png' },
-  { name: 'Dubai Airports', hiring: false, logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Dubai_Airports_logo.svg/2560px-Dubai_Airports_logo.svg.png' },
-  { name: 'ADNOC', hiring: true, logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/ADNOC_Logo.svg/2560px-ADNOC_Logo.svg.png' },
-  { name: 'DP World', hiring: false, logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/DP_World_logo.svg/2560px-DP_World_logo.svg.png' },
-  { name: 'Majid Al Futtaim', hiring: true, logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Majid_Al_Futtaim_Holding_logo.svg/2560px-Majid_Al_Futtaim_Holding_logo.svg.png' },
-  { name: 'Aramex', hiring: false, logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Aramex_logo.svg/2560px-Aramex_logo.svg.png' }
+  { name: 'Emirates Group', hiring: true, logo: companyLogo1 },
+  { name: 'Emaar Properties', hiring: false, logo: companyLogo2 },
+  { name: 'Etisalat', hiring: true, logo: companyLogo3 },
+  { name: 'Dubai Airports', hiring: false, logo: companyLogo4 },
+  { name: 'ADNOC', hiring: true, logo: companyLogo5 },
+  { name: 'DP World', hiring: false, logo: companyLogo6 },
+  { name: 'Majid Al Futtaim', hiring: true, logo: companyLogo7 },
+  { name: 'Aramex', hiring: false, logo: companyLogo8 }
 ]
 
 export function TrustedCompaniesSection() {
