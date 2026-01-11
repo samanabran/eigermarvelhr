@@ -1,15 +1,22 @@
 import { Badge } from '@/components/ui/badge'
-import { Buildings, Briefcase } from '@phosphor-icons/react'
+import aiNeuralNetwork from '@/assets/images/01-ai-neural-network.png'
+import cloudIntegration from '@/assets/images/02-cloud-integration.png'
+import cloudStorage from '@/assets/images/03-cloud-storage.png'
+import lightningSpeed from '@/assets/images/04-lightning-speed.png'
+import securityShieldLeft from '@/assets/images/05-security-shield-left.png'
+import securityShieldRight from '@/assets/images/06-security-shield-right.png'
+import globalTransform from '@/assets/images/07-global-transform.png'
+import dataAnalytics from '@/assets/images/08-data-analytics.png'
 
 const companies = [
-  { name: 'Emirates Group', hiring: true },
-  { name: 'Emaar Properties', hiring: false },
-  { name: 'Etisalat', hiring: true },
-  { name: 'Dubai Airports', hiring: false },
-  { name: 'ADNOC', hiring: true },
-  { name: 'DP World', hiring: false },
-  { name: 'Majid Al Futtaim', hiring: true },
-  { name: 'Aramex', hiring: false }
+  { name: 'Emirates Group', hiring: true, logo: aiNeuralNetwork },
+  { name: 'Emaar Properties', hiring: false, logo: cloudIntegration },
+  { name: 'Etisalat', hiring: true, logo: cloudStorage },
+  { name: 'Dubai Airports', hiring: false, logo: lightningSpeed },
+  { name: 'ADNOC', hiring: true, logo: securityShieldLeft },
+  { name: 'DP World', hiring: false, logo: securityShieldRight },
+  { name: 'Majid Al Futtaim', hiring: true, logo: globalTransform },
+  { name: 'Aramex', hiring: false, logo: dataAnalytics }
 ]
 
 export function TrustedCompaniesSection() {
@@ -32,11 +39,17 @@ export function TrustedCompaniesSection() {
               className="relative bg-gradient-to-br from-foreground to-foreground/90 rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center gap-3 hover:shadow-xl transition-all min-h-[140px] group overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <Buildings 
-                size={40} 
-                weight="bold" 
-                className="text-background relative z-10 transition-transform group-hover:scale-110" 
-              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-accent/10 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              <div className="w-16 h-16 relative z-10 flex items-center justify-center">
+                <img 
+                  src={company.logo} 
+                  alt={`${company.name} logo`}
+                  className="w-full h-full object-contain transition-transform group-hover:scale-110 duration-300 drop-shadow-2xl"
+                  style={{ filter: 'brightness(0) invert(1) drop-shadow(0 0 12px rgba(214, 184, 92, 0.4))' }}
+                />
+              </div>
+              
               <span className="text-xs sm:text-sm font-semibold text-background text-center break-words w-full px-2 relative z-10">
                 {company.name}
               </span>
@@ -45,6 +58,12 @@ export function TrustedCompaniesSection() {
                   Actively Hiring
                 </Badge>
               )}
+              
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" 
+                   style={{ 
+                     boxShadow: 'inset 0 0 25px rgba(214, 184, 92, 0.15), 0 0 20px rgba(214, 184, 92, 0.1)' 
+                   }} 
+              />
             </div>
           ))}
         </div>
