@@ -27,7 +27,13 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section className="relative bg-black text-white overflow-hidden">
       <div className="relative w-full h-[600px] sm:h-[700px] lg:h-[800px]">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black" />
+        {/* Premium black gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black z-10" />
+        {/* Vignette effect for premium depth */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60 z-10" />
+        {/* Side shades for focus */}
+        <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black/80 to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black/80 to-transparent z-10" />
         
         <img 
           src={teamPhoto} 
@@ -35,7 +41,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           className="w-full h-full object-cover object-center smoke-shadow"
         />
         
-        <div className="absolute inset-0 flex items-end pb-12 sm:pb-16 lg:pb-20">
+        <div className="absolute inset-0 flex items-end pb-12 sm:pb-16 lg:pb-20 z-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-3xl">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-4 text-white drop-shadow-2xl break-words min-h-[3rem] sm:min-h-[4rem] lg:min-h-[5rem]">
