@@ -27,13 +27,15 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section className="relative bg-black text-white overflow-hidden">
       <div className="relative w-full h-[600px] sm:h-[700px] lg:h-[800px]">
-        {/* Premium black gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black z-10" />
-        {/* Vignette effect for premium depth */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60 z-10" />
-        {/* Side shades for focus */}
-        <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black/80 to-transparent z-10" />
-        <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black/80 to-transparent z-10" />
+        {/* Soft top vignette to keep natural colors */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/20 to-transparent z-10" />
+        {/* Gentle radial to add depth without darkening overall image */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/10 to-black/30 z-10" />
+        {/* Side shades softened for subtle focus */}
+        <div className="absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-black/45 to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-1/5 bg-gradient-to-l from-black/45 to-transparent z-10" />
+        {/* Footer shade to anchor text without muting image colors */}
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/70 via-black/50 to-transparent z-10" />
         
         <img 
           src={teamPhoto} 
