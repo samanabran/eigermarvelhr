@@ -8,6 +8,8 @@ const companyLogos = [
   'https://res.cloudinary.com/dsl5fhclj/image/upload/v1768167979/atxw0ilmdrbmbgtwwhgo.png',
 ]
 
+const carouselLogos = [...companyLogos, ...companyLogos]
+
 export function TrustedCompaniesSection() {
   const [api, setApi] = useState<import('@/components/ui/carousel').CarouselApi | null>(null)
 
@@ -37,7 +39,7 @@ export function TrustedCompaniesSection() {
           className="relative"
         >
           <CarouselContent className="items-center">
-            {companyLogos.map((logo, idx) => (
+            {carouselLogos.map((logo, idx) => (
               <CarouselItem
                 key={idx}
                 className="basis-1/2 md:basis-1/4"
