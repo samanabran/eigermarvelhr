@@ -49,13 +49,14 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
   }
 
   return (
-    <header className="bg-primary/98 backdrop-blur-md text-primary-foreground sticky top-0 z-50 shadow-lg border-b border-accent/20">
+    <header className="bg-primary/98 backdrop-blur-md text-primary-foreground sticky top-0 z-50 shadow-lg border-b border-accent/20" role="banner">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-4 sm:gap-8 min-w-0">
             <button 
               onClick={() => onNavigate('home')} 
               className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-all duration-300 hover:scale-105 min-w-0"
+              aria-label="Eiger Marvel Home"
             >
               <img 
                 src={logoIcon} 
@@ -68,7 +69,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
               </div>
             </button>
 
-            <nav className="hidden md:flex items-center gap-4 lg:gap-6">
+            <nav className="hidden md:flex items-center gap-4 lg:gap-6" role="navigation" aria-label="Main navigation">
               {navItems.map(item => (
                 <button
                   key={item.value}
@@ -144,13 +145,15 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
           <button
             className="md:hidden hover:bg-primary-foreground/10 p-2 rounded-lg transition-colors flex-shrink-0"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen ? 'true' : 'false'}
           >
             {mobileMenuOpen ? <X size={24} /> : <List size={24} />}
           </button>
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-primary-foreground/20 py-4">
+          <div className="md:hidden border-t border-primary-foreground/20 py-4" role="navigation" aria-label="Mobile navigation">
             <nav className="flex flex-col gap-3">
               {navItems.map(item => (
                 <button

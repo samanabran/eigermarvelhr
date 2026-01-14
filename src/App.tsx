@@ -15,6 +15,7 @@ import { TalentTechSection } from '@/components/home/TalentTechSection'
 import { ServicesSection } from '@/components/home/ServicesSection'
 import { PremiumSection } from '@/components/home/PremiumSection'
 import { JobsPage } from '@/components/pages/JobsPage'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import type { UserType, JobPosting, CandidateProfile, User } from '@/lib/types'
 import { sampleJobs } from '@/lib/sample-jobs'
 
@@ -27,6 +28,7 @@ function App() {
   const [newCandidateId, setNewCandidateId] = useState<string | null>(null)
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [candidateProfile, setCandidateProfile] = useState<CandidateProfile | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
   
   const [jobs] = useKV<JobPosting[]>('jobs', [])
 
@@ -35,19 +37,27 @@ function App() {
   }, [])
 
   const loadCurrentUser = async () => {
-    const userId = await spark.kv.get<string>('currentUser')
-    if (userId) {
-      const user = await spark.kv.get<User>(`user:${userId}`)
-      if (user) {
-        setCurrentUser(user)
-        
-        if (user.userType === 'candidate') {
-          const profile = await spark.kv.get<CandidateProfile>(`candidate_profile:${userId}`)
-          if (profile) {
-            setCandidateProfile({ ...profile, isPremium: user.isPremium })
+    try {
+      setIsLoading(true)
+      const userId = await spark.kv.get<string>('currentUser')
+      if (userId) {
+        const user = await spark.kv.get<User>(`user:${userId}`)
+        if (user) {
+          setCurrentUser(user)
+          
+          if (user.userType === 'candidate') {
+            const profile = await spark.kv.get<CandidateProfile>(`candidate_profile:${userId}`)
+            if (profile) {
+              setCandidateProfile({ ...profile, isPremium: user.isPremium })
+            }
           }
         }
       }
+    } catch (error) {
+      console.error('Error loading current user:', error)
+      toast.error('Failed to load user session')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -102,16 +112,21 @@ function App() {
   }
 
   const handleApplyJob = async (jobId: string) => {
-    if (!currentUser || !candidateProfile) {
-      toast.error('Please log in as a candidate to apply')
-      return
-    }
-    // Search both persisted jobs and sample jobs
-    const allJobs: JobPosting[] = [...(jobs || []), ...sampleJobs]
-    const applicationId = `app_${Date.now()}`
-    const job = allJobs.find(j => j.id === jobId)
-    
-    if (job) {
+    try {
+      if (!currentUser || !candidateProfile) {
+        toast.error('Please log in as a candidate to apply')
+        return
+      }
+      // Search both persisted jobs and sample jobs
+      const allJobs: JobPosting[] = [...(jobs || []), ...sampleJobs]
+      const applicationId = `app_${Date.now()}`
+      const job = allJobs.find(j => j.id === jobId)
+      
+      if (!job) {
+        toast.error('Job not found')
+        return
+      }
+
       const { calculateMatchScore } = await import('@/lib/matching')
       const matchScore = calculateMatchScore(candidateProfile, job).totalScore
 
@@ -128,6 +143,9 @@ function App() {
       toast.success('Application submitted successfully!', {
         description: `Match score: ${matchScore}%`
       })
+    } catch (error) {
+      console.error('Error applying for job:', error)
+      toast.error('Failed to submit application. Please try again.')
     }
   }
 
@@ -152,17 +170,45 @@ function App() {
   }
 
   const handleLogout = async () => {
-    await spark.kv.delete('currentUser')
-    setCurrentUser(null)
-    setCandidateProfile(null)
-    setCurrentPage('home')
-    toast.success('Logged out successfully')
+    try {
+      await spark.kv.delete('currentUser')
+      setCurrentUser(null)
+      setCandidateProfile(null)
+      setCurrentPage('home')
+      toast.success('Logged out successfully')
+    } catch (error) {
+      console.error('Error logging out:', error)
+      toast.error('Failed to log out. Please try again.')
+    }
   }
 
   const effectiveJobs = (jobs && jobs.length > 0) ? jobs : sampleJobs
 
+  if (isLoading) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Header 
+          onNavigate={setCurrentPage}
+          currentPage={currentPage}
+          onAuthClick={handleAuthClick}
+          currentUser={null}
+          candidateProfile={null}
+          onLogout={handleLogout}
+        />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <ErrorBoundary>
+      <div className="flex flex-col min-h-screen">
       <Header 
         onNavigate={setCurrentPage}
         currentPage={currentPage}
@@ -216,13 +262,75 @@ function App() {
         )}
 
         {currentPage === 'employers' && (
-          <div className="min-h-screen bg-secondary flex items-center justify-center p-8">
-            <div className="text-center max-w-2xl">
-              <h1 className="text-4xl font-bold mb-4">Employer Portal</h1>
-              <p className="text-lg text-muted-foreground mb-6">
-                Post jobs, review AI-matched candidates, and hire top talent across the MENA region.
-              </p>
-              <p className="text-sm text-muted-foreground">Feature in development</p>
+          <div className="min-h-screen bg-gradient-to-br from-secondary via-background to-secondary py-16 px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h1 className="text-4xl sm:text-5xl font-bold mb-4">Employer Portal</h1>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Post jobs, review AI-matched candidates, and hire top talent across the MENA region.
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <div className="bg-card p-8 rounded-lg border border-border shadow-md hover:shadow-lg transition-shadow">
+                  <h2 className="text-2xl font-bold mb-4">Post a Job</h2>
+                  <p className="text-muted-foreground mb-4">Reach thousands of qualified candidates and find your perfect match.</p>
+                  <ul className="space-y-2 text-sm text-muted-foreground mb-6">
+                    <li>✓ Unlimited job postings</li>
+                    <li>✓ AI-powered candidate matching</li>
+                    <li>✓ Applicant tracking system</li>
+                    <li>✓ Analytics dashboard</li>
+                  </ul>
+                  <button 
+                    onClick={() => toast.info('Job posting feature coming soon')}
+                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold py-2 px-4 rounded-lg transition-all"
+                  >
+                    Post a Job
+                  </button>
+                </div>
+
+                <div className="bg-card p-8 rounded-lg border border-border shadow-md hover:shadow-lg transition-shadow">
+                  <h2 className="text-2xl font-bold mb-4">Learn More</h2>
+                  <p className="text-muted-foreground mb-4">Contact our team to discuss your hiring needs.</p>
+                  <div className="space-y-4 mb-6">
+                    <div>
+                      <p className="font-semibold text-foreground">Phone</p>
+                      <a href="tel:+971586241100" className="text-accent hover:underline">+971 58 624 1100</a>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">Email</p>
+                      <a href="mailto:employers@em-gc.com" className="text-accent hover:underline">employers@em-gc.com</a>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => setCurrentPage('contact')}
+                    className="w-full border border-accent text-accent hover:bg-accent/10 font-semibold py-2 px-4 rounded-lg transition-all"
+                  >
+                    Contact Us
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-card p-8 rounded-lg border border-border">
+                <h2 className="text-2xl font-bold mb-4">Featured Benefits</h2>
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div>
+                    <div className="text-4xl font-bold text-accent mb-2">AI</div>
+                    <p className="font-semibold mb-2">Smart Matching</p>
+                    <p className="text-sm text-muted-foreground">Our AI matches your requirements with top candidates automatically.</p>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold text-accent mb-2">24/7</div>
+                    <p className="font-semibold mb-2">24/7 Support</p>
+                    <p className="text-sm text-muted-foreground">Dedicated support team available round the clock for all your needs.</p>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold text-accent mb-2">📊</div>
+                    <p className="font-semibold mb-2">Analytics</p>
+                    <p className="text-sm text-muted-foreground">Comprehensive insights into your hiring pipeline and performance metrics.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -236,24 +344,105 @@ function App() {
         )}
 
         {currentPage === 'contact' && (
-          <div className="min-h-screen bg-secondary flex items-center justify-center p-8">
-            <div className="text-center max-w-2xl">
-              <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-              <p className="text-lg text-muted-foreground mb-6">
-                Get in touch with Eiger Marvel HR Consultancies
-              </p>
-              <div className="space-y-4 text-left bg-background p-8 rounded-lg shadow-md">
-                <div>
-                  <p className="font-semibold">Phone</p>
-                  <p className="text-muted-foreground">+971 58 624 1100</p>
+          <div className="min-h-screen bg-gradient-to-br from-secondary via-background to-secondary py-16 px-4">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-12">
+                <h1 className="text-4xl sm:text-5xl font-bold mb-4">Contact Us</h1>
+                <p className="text-lg text-muted-foreground">
+                  Get in touch with Eiger Marvel HR Consultancies
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Contact Info */}
+                <div className="space-y-6">
+                  <div className="bg-card p-6 rounded-lg border border-border">
+                    <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                      <span className="text-2xl">📞</span> Phone
+                    </h3>
+                    <a href="tel:+971586241100" className="text-accent hover:underline font-medium">
+                      +971 58 624 1100
+                    </a>
+                  </div>
+
+                  <div className="bg-card p-6 rounded-lg border border-border">
+                    <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                      <span className="text-2xl">✉️</span> Email
+                    </h3>
+                    <a href="mailto:info@em-gc.com" className="text-accent hover:underline font-medium">
+                      info@em-gc.com
+                    </a>
+                  </div>
+
+                  <div className="bg-card p-6 rounded-lg border border-border">
+                    <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                      <span className="text-2xl">📍</span> Location
+                    </h3>
+                    <p className="text-muted-foreground font-medium">
+                      Dubai, UAE
+                    </p>
+                  </div>
+
+                  <div className="bg-card p-6 rounded-lg border border-border">
+                    <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                      <span className="text-2xl">⏰</span> Hours
+                    </h3>
+                    <p className="text-muted-foreground font-medium">
+                      Monday - Friday: 9 AM - 6 PM (GMT+4)
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold">Email</p>
-                  <p className="text-muted-foreground">info@em-gc.com</p>
-                </div>
-                <div>
-                  <p className="font-semibold">Location</p>
-                  <p className="text-muted-foreground">Dubai, UAE</p>
+
+                {/* Contact Form */}
+                <div className="bg-card p-8 rounded-lg border border-border shadow-md">
+                  <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
+                  <form className="space-y-4" onSubmit={(e) => {
+                    e.preventDefault()
+                    toast.success('Thank you for your message! We will get back to you soon.')
+                  }}>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Name</label>
+                      <input 
+                        type="text"
+                        required
+                        className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
+                        placeholder="Your name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Email</label>
+                      <input 
+                        type="email"
+                        required
+                        className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Subject</label>
+                      <input 
+                        type="text"
+                        required
+                        className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
+                        placeholder="Message subject"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Message</label>
+                      <textarea 
+                        required
+                        rows={4}
+                        className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background resize-none"
+                        placeholder="Your message..."
+                      />
+                    </div>
+                    <button 
+                      type="submit"
+                      className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold py-2 px-4 rounded-lg transition-all"
+                    >
+                      Send Message
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -281,6 +470,7 @@ function App() {
 
       <Toaster position="top-right" />
     </div>
+    </ErrorBoundary>
   )
 }
 
