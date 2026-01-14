@@ -4,6 +4,69 @@
 ✅ Build successful (dist folder generated)
 ✅ Cloudflare configuration files created
 ✅ Changes committed and pushed to GitHub
+✅ GitHub Actions workflow configured for automatic deployment
+
+## Automatic Deployment Setup
+
+### Step 1: Get Cloudflare Credentials
+
+1. **Get Cloudflare Account ID**:
+   - Login to https://dash.cloudflare.com/
+   - Click on "Workers & Pages" in the sidebar
+   - Your Account ID is displayed in the right sidebar
+
+2. **Create Cloudflare API Token**:
+   - Go to https://dash.cloudflare.com/profile/api-tokens
+   - Click "Create Token"
+   - Use "Edit Cloudflare Workers" template or create custom token with:
+     - Permissions: `Account - Cloudflare Pages - Edit`
+   - Click "Continue to summary" → "Create Token"
+   - **Copy the token immediately** (you won't see it again)
+
+### Step 2: Add GitHub Secrets
+
+1. Go to your GitHub repository: https://github.com/renbran/eiger-marvel-hr-plat
+2. Click **Settings** → **Secrets and variables** → **Actions**
+3. Click **New repository secret** and add these two secrets:
+
+   **Secret 1:**
+   - Name: `CLOUDFLARE_API_TOKEN`
+   - Value: [Paste the API token from Step 1]
+
+   **Secret 2:**
+   - Name: `CLOUDFLARE_ACCOUNT_ID`
+   - Value: [Paste your Account ID from Step 1]
+
+4. Click **Add secret** for each
+
+### Step 3: Enable GitHub Actions
+
+1. Go to **Actions** tab in your repository
+2. If prompted, click **"I understand my workflows, go ahead and enable them"**
+
+### Step 4: Trigger First Deployment
+
+Option A: Push any change to main branch
+```bash
+git commit --allow-empty -m "Trigger deployment"
+git push origin main
+```
+
+Option B: Re-run the workflow manually
+1. Go to **Actions** tab
+2. Click on "Deploy to Cloudflare Pages" workflow
+3. Click "Run workflow"
+
+### ✅ That's It!
+
+Now every push to `main` branch will automatically:
+1. Build your application
+2. Deploy to Cloudflare Pages
+3. Update your live site at `https://eiger-marvel-hr-plat.pages.dev`
+
+Preview deployments are created automatically for all pull requests!
+
+---
 
 ## Deploy to Cloudflare Pages
 
