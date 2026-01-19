@@ -253,9 +253,9 @@
     <record id="email_template_visa_completed" model="mail.template">
         <field name="name">Recruitment - Visa Completed</field>
         <field name="model_id" ref="model_uae_visa_processing"/>
-        <field name="email_from">{{ object.company_id.email or '' }}</field>
-        <field name="email_to">{{ object.applicant_id.email_from or '' }}</field>
-        <field name="subject">Your Visa is Ready! - {{ object.name or '' }}</field>
+        <field name="email_from">${object.company_id.email or user.email or ''}</field>
+        <field name="email_to">${object.applicant_id.email_from or ''}</field>
+        <field name="subject">Your Visa is Ready! - ${object.name or ''}</field>
         <field name="body_html"><![CDATA[
             <html>
                 <body>
@@ -292,9 +292,9 @@
     <record id="email_template_client_verified" model="mail.template">
         <field name="name">Recruitment - Client Verified</field>
         <field name="model_id" ref="model_recruitment_client"/>
-        <field name="email_from">{{ object.company_id.email or '' }}</field>
-        <field name="email_to">{{ object.email or '' }}</field>
-        <field name="subject">Welcome! Your Account is Verified - {{ object.name or '' }}</field>
+        <field name="email_from">${object.company_id.email or user.email or ''}</field>
+        <field name="email_to">${object.email or ''}</field>
+        <field name="subject">Welcome! Your Account is Verified - ${object.name or ''}</field>
         <field name="body_html"><![CDATA[
             <html>
                 <body>
@@ -357,10 +357,10 @@
     <record id="email_template_placement_confirmed" model="mail.template">
         <field name="name">Recruitment - Placement Confirmed</field>
         <field name="model_id" ref="model_recruitment_placement"/>
-        <field name="email_from">{{ object.company_id.email or '' }}</field>
-        <field name="email_to">{{ object.applicant_id.email_from or '' }}</field>
-        <field name="partner_to">{{ object.client_id.partner_id.id if object.client_id.partner_id else '' }}</field>
-        <field name="subject">Placement Confirmed - {{ object.applicant_id.partner_name or '' }} at {{ object.client_id.name or '' }}</field>
+        <field name="email_from">${object.company_id.email or user.email or ''}</field>
+        <field name="email_to">${object.applicant_id.email_from or ''}</field>
+        <field name="partner_to">${object.client_id.partner_id.id if object.client_id.partner_id else ''}</field>
+        <field name="subject">Placement Confirmed - ${object.applicant_id.partner_name or ''} at ${object.client_id.name or ''}</field>
         <field name="body_html"><![CDATA[
             <html>
                 <body>

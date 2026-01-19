@@ -12,7 +12,7 @@
     <record id="menu_recruitment_dashboard" model="ir.ui.menu">
         <field name="name">Dashboard</field>
         <field name="parent_id" ref="menu_recruitment_root"/>
-        <field name="action" ref="action_recruitment_dashboard"/>
+        <field name="action" ref="action_open_dashboard"/>
         <field name="sequence">5</field>
     </record>
 

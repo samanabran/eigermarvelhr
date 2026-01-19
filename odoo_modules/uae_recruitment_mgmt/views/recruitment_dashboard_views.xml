@@ -6,189 +6,116 @@
         <field name="name">recruitment.dashboard.form</field>
         <field name="model">recruitment.dashboard</field>
         <field name="arch" type="xml">
-            <form>
+            <form string="Recruitment Dashboard" create="false" edit="false" delete="false">
                 <sheet>
                     <div class="oe_title">
-                        <h1>Recruitment Dashboard</h1>
+                        <h1>📊 Recruitment Dashboard</h1>
+                        <p class="text-muted">Real-time recruitment metrics and analytics</p>
                     </div>
 
                     <!-- Key Metrics Section -->
-                    <div class="row mt-4 mb-4">
-                        <div class="col-md-3">
-                            <div class="card bg-light">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title text-muted">Active Job Orders</h6>
-                                    <h2 class="card-text text-primary" id="active_jobs">-</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-light">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title text-muted">Total Candidates</h6>
-                                    <h2 class="card-text text-info" id="total_candidates">-</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-light">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title text-muted">This Month Placements</h6>
-                                    <h2 class="card-text text-success" id="month_placements">-</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-light">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title text-muted">Month Revenue</h6>
-                                    <h2 class="card-text text-warning" id="month_revenue">-</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <group string="Key Performance Indicators" col="4">
+                        <field name="active_jobs" widget="statinfo" string="Active Jobs"/>
+                        <field name="total_candidates" widget="statinfo" string="Total Candidates"/>
+                        <field name="placements_month" widget="statinfo" string="Placements (Month)"/>
+                        <field name="total_revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    </group>
 
-                    <!-- Secondary Metrics -->
-                    <div class="row mb-4">
-                        <div class="col-md-3">
-                            <div class="card bg-light">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title text-muted">In Progress Visa</h6>
-                                    <h2 class="card-text text-danger" id="visa_in_progress">-</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-light">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title text-muted">Completed Visa</h6>
-                                    <h2 class="card-text text-success" id="visa_completed">-</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-light">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title text-muted">Active Clients</h6>
-                                    <h2 class="card-text text-primary" id="active_clients">-</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-light">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title text-muted">Verified Clients</h6>
-                                    <h2 class="card-text text-info" id="verified_clients">-</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <group string="Secondary Metrics" col="4">
+                        <field name="visa_in_progress" widget="statinfo" string="Visa In Progress"/>
+                        <field name="visa_completed" widget="statinfo" string="Visa Completed"/>
+                        <field name="active_clients" widget="statinfo" string="Active Clients"/>
+                        <field name="total_clients" widget="statinfo" string="Total Clients"/>
+                    </group>
 
-                    <!-- Recent Placements -->
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h5 class="mb-0">Recent Placements</h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-sm table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Candidate</th>
-                                        <th>Client</th>
-                                        <th>Job</th>
-                                        <th>Salary</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="recent_placements">
-                                    <tr><td colspan="5" class="text-center text-muted">Loading...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Job Statistics -->
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">Job Order Statistics</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <strong>Total:</strong> <span id="job_total">-</span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>Active:</strong> <span id="job_active">-</span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>Posted:</strong> <span id="job_posted">-</span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>Filled:</strong> <span id="job_filled">-</span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>Avg. Time to Fill:</strong> <span id="job_avg_time">-</span> days
-                                    </div>
-                                </div>
+                    <notebook>
+                        <!-- Job Orders Tab -->
+                        <page string="📋 Job Orders">
+                            <group string="Job Order Statistics" col="4">
+                                <field name="job_total"/>
+                                <field name="job_active" decoration-info="job_active > 0"/>
+                                <field name="job_posted" decoration-warning="job_posted > 0"/>
+                                <field name="job_filled" decoration-success="job_filled > 0"/>
+                                <field name="job_closed"/>
+                                <field name="avg_time_to_fill" string="Avg Days to Fill" widget="float"/>
+                            </group>
+                            
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Quick Actions:</strong></p>
+                                <button name="%(action_recruitment_job_order)d" type="action" string="View All Jobs" class="btn btn-primary"/>
+                                <button name="%(action_recruitment_job_order)d" type="action" string="Active Jobs" class="btn btn-success" context="{'search_default_active_jobs': 1}"/>
                             </div>
-                        </div>
+                        </page>
 
-                        <!-- Candidate Statistics -->
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">Candidate Statistics</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <strong>New:</strong> <span id="candidate_new">-</span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>In Interview:</strong> <span id="candidate_interview">-</span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>Offered:</strong> <span id="candidate_offered">-</span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>High Match (75%+):</strong> <span id="candidate_high_match" class="badge badge-success">-</span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <strong>Good Match (50-74%):</strong> <span id="candidate_good_match" class="badge badge-warning">-</span>
-                                    </div>
-                                </div>
+                        <!-- Candidates Tab -->
+                        <page string="👥 Candidates">
+                            <group string="Candidate Statistics" col="4">
+                                <field name="candidate_total"/>
+                                <field name="candidate_new" decoration-info="candidate_new > 0"/>
+                                <field name="candidate_interview" decoration-warning="candidate_interview > 0"/>
+                                <field name="candidate_offered" decoration-success="candidate_offered > 0"/>
+                            </group>
+                            
+                            <group string="AI Matching Results" col="3">
+                                <field name="candidate_high_match" decoration-success="candidate_high_match > 0" string="High Match (80%+)"/>
+                                <field name="candidate_good_match" decoration-warning="candidate_good_match > 0" string="Good Match (50-79%)"/>
+                            </group>
+                            
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Quick Actions:</strong></p>
+                                <button name="%(action_recruitment_candidate)d" type="action" string="View All Candidates" class="btn btn-primary"/>
+                                <button name="%(action_recruitment_candidate)d" type="action" string="Interview Stage" class="btn btn-warning" context="{'search_default_interview_stage': 1}"/>
                             </div>
-                        </div>
-                    </div>
+                        </page>
 
-                    <!-- Revenue Section -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="mb-0">Revenue Analytics</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <h6 class="text-muted">Total Revenue</h6>
-                                        <h3 class="text-success" id="revenue_total">-</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <h6 class="text-muted">Commission</h6>
-                                        <h3 class="text-primary" id="revenue_commission">-</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="text-center">
-                                        <h6 class="text-muted">Avg. Commission</h6>
-                                        <h3 class="text-info" id="revenue_avg_commission">-</h3>
-                                    </div>
-                                </div>
+                        <!-- Revenue Tab -->
+                        <page string="💰 Revenue">
+                            <group string="Revenue Analytics" col="4">
+                                <field name="total_placements"/>
+                                <field name="revenue_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="revenue_commission" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="revenue_avg_commission" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                            
+                            <div class="alert alert-success" role="alert">
+                                <h4>💵 Total Revenue: <field name="revenue_total" readonly="1" nolabel="1" widget="monetary" options="{'currency_field': 'currency_id'}"/></h4>
+                                <p>From <field name="total_placements" readonly="1" nolabel="1"/> successful placements</p>
                             </div>
-                        </div>
-                    </div>
+                            
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Quick Actions:</strong></p>
+                                <button name="%(action_recruitment_placement)d" type="action" string="View All Placements" class="btn btn-primary"/>
+                                <button name="%(action_recruitment_placement)d" type="action" string="Active Placements" class="btn btn-success" context="{'search_default_active_placements': 1}"/>
+                            </div>
+                        </page>
+
+                        <!-- Clients Tab -->
+                        <page string="🏢 Clients">
+                            <group string="Client Overview" col="3">
+                                <field name="total_clients"/>
+                                <field name="active_clients" decoration-success="active_clients > 0"/>
+                            </group>
+                            
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Quick Actions:</strong></p>
+                                <button name="%(action_recruitment_client)d" type="action" string="View All Clients" class="btn btn-primary"/>
+                            </div>
+                        </page>
+
+                        <!-- Visa Processing Tab -->
+                        <page string="🛂 Visa Processing">
+                            <group string="Visa Status" col="3">
+                                <field name="visa_in_progress" decoration-warning="visa_in_progress > 0"/>
+                                <field name="visa_completed" decoration-success="visa_completed > 0"/>
+                            </group>
+                            
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Quick Actions:</strong></p>
+                                <button name="%(action_uae_visa_processing)d" type="action" string="View All Visas" class="btn btn-primary"/>
+                                <button name="%(action_uae_visa_processing)d" type="action" string="In Progress" class="btn btn-warning" context="{'search_default_in_progress': 1}"/>
+                            </div>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -200,8 +127,33 @@
         <field name="res_model">recruitment.dashboard</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_recruitment_dashboard_form"/>
-        <field name="target">main</field>
+        <field name="target">current</field>
+        <field name="context">{'form_view_initial_mode': 'readonly', 'create': False, 'edit': False, 'delete': False}</field>
+        <field name="limit">1</field>
+    </record>
+
+    <!-- Server Action to Open Dashboard (always loads first record) -->
+    <record id="action_open_dashboard" model="ir.actions.server">
+        <field name="name">Open Recruitment Dashboard</field>
+        <field name="model_id" ref="model_recruitment_dashboard"/>
+        <field name="state">code</field>
+        <field name="code">
+# Get or create singleton dashboard
+dashboard = env['recruitment.dashboard'].search([], limit=1)
+if not dashboard:
+    dashboard = env['recruitment.dashboard'].create({'name': 'Dashboard'})
+
+action = {
+    'type': 'ir.actions.act_window',
+    'name': 'Recruitment Dashboard',
+    'res_model': 'recruitment.dashboard',
+    'res_id': dashboard.id,
+    'view_mode': 'form',
+    'view_id': env.ref('uae_recruitment_mgmt.view_recruitment_dashboard_form').id,
+    'target': 'current',
+    'context': {'form_view_initial_mode': 'readonly'},
+}
+        </field>
     </record>
 
 </odoo>
-

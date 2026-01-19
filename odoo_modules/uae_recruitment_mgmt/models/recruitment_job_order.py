@@ -350,7 +350,7 @@ class RecruitmentJobOrder(models.Model):
             'type': 'ir.actions.act_window',
             'name': _('Matched Candidates'),
             'res_model': 'hr.applicant',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': [('id', 'in', [m['applicant'].id for m in top_matches])],
             'context': {'default_job_id': self.id}
         }
