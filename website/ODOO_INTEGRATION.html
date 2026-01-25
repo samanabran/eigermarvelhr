@@ -137,7 +137,7 @@
         <!-- Main Iframe -->
         <iframe 
             id="hrPlatformFrame"
-            src="YOUR-HOSTED-WEBSITE-URL"
+            src="https://eigermarvel.netlify.app"
             title="Workforce 360° - HR Platform"
             allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; geolocation; gyroscope; picture-in-picture"
             loading="lazy"
@@ -148,7 +148,7 @@
             <!-- Fallback for browsers that don't support iframes -->
             <p style="padding: 40px; text-align: center; font-family: sans-serif;">
                 Your browser doesn't support iframes. 
-                <a href="YOUR-HOSTED-WEBSITE-URL" target="_blank" rel="noopener noreferrer" 
+                <a href="https://eigermarvel.netlify.app" target="_blank" rel="noopener noreferrer" 
                    style="color: #1a73e8; text-decoration: underline;">
                     Click here to visit the Workforce 360° platform directly.
                 </a>
@@ -199,7 +199,7 @@
     // This allows two-way communication between Odoo and embedded site
     window.addEventListener('message', function(event) {
         // Verify origin for security (replace with your actual domain)
-        // if (event.origin !== 'YOUR-HOSTED-WEBSITE-URL') return;
+        // if (event.origin !== 'https://eigermarvel.netlify.app') return;
         
         // Handle messages from embedded site
         if (event.data && event.data.type) {
