@@ -302,11 +302,11 @@ function App() {
                   <div className="space-y-4 mb-6">
                     <div>
                       <p className="font-semibold text-foreground">Phone</p>
-                      <a href="tel:+971586241100" className="text-accent hover:underline">+971 58 624 1100</a>
+                      <a href="tel:+97145751100" className="text-accent hover:underline">+971 4 575 1100</a>
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">Email</p>
-                      <a href="mailto:employers@em-gc.com" className="text-accent hover:underline">employers@em-gc.com</a>
+                      <a href="mailto:employers@eigermarvelhr.com" className="text-accent hover:underline">employers@eigermarvelhr.com</a>
                     </div>
                   </div>
                   <button 
@@ -367,8 +367,8 @@ function App() {
                     <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
                       <span className="text-2xl">📞</span> Phone
                     </h3>
-                    <a href="tel:+971586241100" className="text-accent hover:underline font-medium">
-                      +971 58 624 1100
+                    <a href="tel:+97145751100" className="text-accent hover:underline font-medium">
+                      +971 4 575 1100
                     </a>
                   </div>
 
@@ -376,8 +376,8 @@ function App() {
                     <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
                       <span className="text-2xl">✉️</span> Email
                     </h3>
-                    <a href="mailto:info@em-gc.com" className="text-accent hover:underline font-medium">
-                      info@em-gc.com
+                    <a href="mailto:info@eigermarvelhr.com" className="text-accent hover:underline font-medium">
+                      info@eigermarvelhr.com
                     </a>
                   </div>
 

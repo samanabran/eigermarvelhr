@@ -7,11 +7,11 @@
   }
   
   body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
   }
-  
+
   h1, h2, h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
   }
 }
 
@@ -34,7 +34,7 @@
   --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.50 0 0);
   
-  --accent: oklch(0.82 0.11 85);
+  --accent: oklch(0.75 0.12 85);
   --accent-foreground: oklch(0.15 0 0);
   
   --destructive: oklch(0.577 0.245 27.325);
@@ -42,7 +42,7 @@
   
   --border: oklch(0.89 0 0);
   --input: oklch(0.89 0 0);
-  --ring: oklch(0.82 0.11 85);
+  --ring: oklch(0.75 0.12 85);
   
   --radius: 0.625rem;
 }

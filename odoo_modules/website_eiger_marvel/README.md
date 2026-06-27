@@ -120,8 +120,8 @@ Templates are in `/views/website_templates.xml` - edit using standard QWeb synta
 ## Support
 
 For issues or questions:
-- Email: info@em-gc.com
-- Phone: +971 58 624 1100
+- Email: info@eigermarvelhr.com
+- Phone: +971 4 575 1100
 
 ## License
 

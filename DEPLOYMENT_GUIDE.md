@@ -173,7 +173,7 @@ info@eigermarvel.com → Your email
 <a href="https://wa.me/971XXXXXXXXX">WhatsApp</a>
 
 <!-- NEW -->
-<a href="https://wa.me/971501234567">WhatsApp</a>
+<a href="https://wa.me/97145751100">WhatsApp</a>
 ```
 
 ---
@@ -368,7 +368,7 @@ Replace `G-XXXXXXXXXX` with your Google Analytics measurement ID.
 
 **To Update:**
 1. Replace `971XXXXXXXXX` with your WhatsApp number (country code + number, no spaces)
-2. Example: `971501234567`
+2. Example: `97145751100`
 
 ---
 
@@ -478,8 +478,8 @@ document.querySelector('.btn-primary').addEventListener('click', () => {
 ### Issue: WhatsApp button not working
 
 **Solution:**
-1. Verify phone number format: `+971501234567` (no spaces or dashes)
-2. Test URL directly: `https://wa.me/971501234567`
+1. Verify phone number format: `+97145751100` (no spaces or dashes)
+2. Test URL directly: `https://wa.me/97145751100`
 3. Ensure phone number is WhatsApp-enabled
 
 ---

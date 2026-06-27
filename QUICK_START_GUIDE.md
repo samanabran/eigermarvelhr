@@ -26,8 +26,8 @@ website/
 
 Find & replace 2 locations:
 ```html
-Line ~650: <a href="https://wa.me/971501234567" ...>
-           Change: 971501234567 → YOUR_NUMBER
+Line ~650: <a href="https://wa.me/97145751100" ...>
+           Change: 97145751100 → YOUR_NUMBER
 
 Line ~700: <p style="color:var(--gold)">+971-50-123-4567</p>
            Change: +971-50-123-4567 → YOUR_NUMBER

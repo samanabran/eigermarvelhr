@@ -108,7 +108,7 @@ export function PrivacyPolicyPage() {
             <p className="text-muted-foreground">
               You may request access, correction, or deletion of your personal
               information, subject to legal requirements. To make a request,
-              contact us at info@em-gc.com.
+              contact us at info@eigermarvelhr.com.
             </p>
           </section>
 
@@ -130,7 +130,7 @@ export function PrivacyPolicyPage() {
             </h2>
             <p className="text-muted-foreground">
               If you have questions about this Privacy Policy, contact us at
-              info@em-gc.com.
+              info@eigermarvelhr.com.
             </p>
           </section>
 

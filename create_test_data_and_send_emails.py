@@ -40,7 +40,7 @@ try:
     partner_id = Partner.create({
         'name': 'John Doe',
         'email': 'john.doe@example.com',
-        'phone': '+971501234567',
+        'phone': '+97145751100',
     })
     
     # Get or create a job position

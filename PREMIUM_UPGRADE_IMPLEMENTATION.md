@@ -248,6 +248,6 @@ const PAYMENT_SUCCESS_RATE = 0.0 // Force failures
 ## Support
 
 For questions or issues:
-- Email: info@em-gc.com
-- Phone: +971 58 624 1100
+- Email: info@eigermarvelhr.com
+- Phone: +971 4 575 1100
 - Documentation: See PRD.md for detailed requirements

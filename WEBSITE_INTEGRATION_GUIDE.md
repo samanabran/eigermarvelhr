@@ -121,10 +121,10 @@ Or use PHP include:
 Find and replace:
 ```html
 <!-- Line ~650 -->
-<a href="https://wa.me/971501234567" ...>
+<a href="https://wa.me/97145751100" ...>
 
 <!-- Line ~700 -->
-<p style="color:var(--gold);font-weight:700">+971-50-123-4567</p>
+<p style="color:var(--gold);font-weight:700">+971 4 575 1100</p>
 <p class="mini">info@eigermarvel.com</p>
 ```
 
@@ -133,7 +133,7 @@ Find and replace:
 Find and update:
 ```javascript
 // Line ~150
-initializeWhatsApp('+971-50-123-4567');  // Change to your number
+initializeWhatsApp('+971 4 575 1100');  // Change to your number
 ```
 
 ### **Update Pricing**
@@ -398,7 +398,7 @@ For advanced customization, you can:
 ## 📞 Quick Reference
 
 ### Contact Updates
-- Phone: `+971-50-123-4567`
+- Phone: `+971 4 575 1100`
 - Email: `info@eigermarvel.com`
 - WhatsApp: Same as phone
 

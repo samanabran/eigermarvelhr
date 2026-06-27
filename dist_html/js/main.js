@@ -193,7 +193,7 @@ document.addEventListener('click', (e) => {
    ============================================== */
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize WhatsApp with phone number (update this)
-    initializeWhatsApp('+971-50-123-4567');
+    initializeWhatsApp('+971 4 575 1100');
 
     // Observe all reveal elements
     document.querySelectorAll('.reveal').forEach((el) => {

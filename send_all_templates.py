@@ -50,7 +50,7 @@ if template2:
             test_applicant = Applicant.create({
                 'name': 'Test Applicant',
                 'email': test_email,
-                'phone': '+971501234567',
+                'phone': '+97145751100',
                 'position': 'Software Developer',
             })
             MailTemplate.send_mail(template2[0], test_applicant, True, {'email_to': test_email})

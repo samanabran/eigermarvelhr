@@ -25,13 +25,13 @@ export function Footer({ onNavigate }: FooterProps) {
           <div>
             <h3 className="font-semibold text-xs sm:text-sm uppercase tracking-wide mb-4 text-accent">Contact</h3>
             <div className="space-y-3">
-              <a href="tel:+971586241100" className="flex items-center gap-2 text-xs sm:text-sm hover:text-accent transition-all duration-300 hover:translate-x-1">
+              <a href="tel:+97145751100" className="flex items-center gap-2 text-xs sm:text-sm hover:text-accent transition-all duration-300 hover:translate-x-1">
                 <Phone size={16} weight="bold" className="flex-shrink-0" />
-                <span className="break-words">+971 58 624 1100</span>
+                <span className="break-words">+971 4 575 1100</span>
               </a>
-              <a href="mailto:info@em-gc.com" className="flex items-center gap-2 text-xs sm:text-sm hover:text-accent transition-all duration-300 hover:translate-x-1">
+              <a href="mailto:info@eigermarvelhr.com" className="flex items-center gap-2 text-xs sm:text-sm hover:text-accent transition-all duration-300 hover:translate-x-1">
                 <Envelope size={16} weight="bold" className="flex-shrink-0" />
-                <span className="break-words">info@em-gc.com</span>
+                <span className="break-words">info@eigermarvelhr.com</span>
               </a>
               <div className="flex items-center gap-2 text-xs sm:text-sm">
                 <MapPin size={16} weight="bold" className="flex-shrink-0" />

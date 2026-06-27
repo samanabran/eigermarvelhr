@@ -177,7 +177,7 @@ const applicants = await odooService.fetchJobApplicants();
 const applicantId = await odooService.createJobApplicant({
   name: 'John Doe',
   email_from: 'john@example.com',
-  phone: '+971586241100',
+  phone: '+97145751100',
   job_id: 123, // Odoo job ID
   description: 'Interested in this position...'
 });

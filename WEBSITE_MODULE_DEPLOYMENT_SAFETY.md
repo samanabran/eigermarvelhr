@@ -218,8 +218,8 @@ ssh root@65.20.72.53 "/var/odoo/eigermarvel/deployment_safety.sh rollback"
 4. **Have rollback ready** ✅ (Script prepared)
 
 ### Support Contacts:
-- **Email**: info@em-gc.com
-- **Phone**: +971 58 624 1100
+- **Email**: info@eigermarvelhr.com
+- **Phone**: +971 4 575 1100
 
 ### Emergency Rollback:
 ```bash
