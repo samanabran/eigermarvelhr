@@ -672,12 +672,15 @@ document.querySelectorAll('[data-anim="fadeUp"]').forEach(el => {
 // ── Word-by-word heading reveals ──
 document.querySelectorAll('h2').forEach(heading => {
   if (heading.closest('.hero-content') || heading.closest('.cta-box')) return;
-  const words = heading.textContent.trim().split(' ');
+  const words = heading.textContent.trim().split(/\s+/);
   heading.innerHTML = '';
-  words.forEach((w, i) => {
+  heading.style.display = 'flex';
+  heading.style.flexWrap = 'wrap';
+  heading.style.gap = '0 0.35em';
+  heading.style.justifyContent = 'center';
+  words.forEach(w => {
     const span = document.createElement('span');
-    span.textContent = w + ' ';
-    span.style.display = 'inline-block';
+    span.textContent = w;
     span.style.opacity = '0';
     span.style.transform = 'translateY(30px)';
     heading.appendChild(span);
