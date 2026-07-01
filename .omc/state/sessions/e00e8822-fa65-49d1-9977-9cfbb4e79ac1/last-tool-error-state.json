@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd \\\"C:\\\\Users\\\\USER\\\\Downloads\\\\eiger-marvel-hr-plat\\\" && git rebase --abort && echo \\\"Rebase aborted cleanly\\\"\",\"description\":\"Abort the dangling rebase to return to clean state\"}",
+  "error": "Exit code 1\nwarning: could not read '.git/rebase-merge/head-name': No such file or directory",
+  "timestamp": "2026-06-29T15:29:22.233Z",
+  "retry_count": 1
+}

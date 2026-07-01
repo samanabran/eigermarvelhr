@@ -1,0 +1,542 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1782898074319,
+  "projectRoot": "C:\\Users\\USER\\Downloads\\eiger-marvel-hr-plat",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "react",
+        "version": "19.0.0",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.0.0",
+        "category": "frontend"
+      },
+      {
+        "name": "playwright",
+        "version": "1.61.1",
+        "category": "testing"
+      },
+      {
+        "name": "vite",
+        "version": "7.2.6",
+        "category": "build"
+      },
+      {
+        "name": "vitest",
+        "version": "4.1.9",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "vite",
+      "kill": "fuser -k 5000/tcp",
+      "build": "tsc -b --noCheck && vite build",
+      "lint": "eslint .",
+      "optimize": "vite optimize",
+      "preview": "vite preview"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": true,
+    "workspaces": [
+      "packages/*"
+    ],
+    "mainDirectories": [
+      "scripts",
+      "src"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 3,
+      "lastAccessed": 1782898074260,
+      "keyFiles": [
+        "index.html",
+        "package.json",
+        "proxy.js"
+      ]
+    },
+    "dist_html": {
+      "path": "dist_html",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1782898074262,
+      "keyFiles": [
+        "index.html",
+        "workforce360.html"
+      ]
+    },
+    "favicon": {
+      "path": "favicon",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1782898074273,
+      "keyFiles": [
+        "apple-touch-icon.png",
+        "favicon-96x96.png",
+        "favicon.ico",
+        "favicon.svg",
+        "web-app-manifest-192x192.png"
+      ]
+    },
+    "final website for upload": {
+      "path": "final website for upload",
+      "purpose": null,
+      "fileCount": 16,
+      "lastAccessed": 1782898074274,
+      "keyFiles": [
+        "DEPLOYMENT.md",
+        "DEPLOY_NETLIFY.md",
+        "index.html",
+        "netlify.toml",
+        "ODOO_INTEGRATION.html"
+      ]
+    },
+    "odoo_modules": {
+      "path": "odoo_modules",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1782898074276,
+      "keyFiles": [
+        "DATABASE_BACKEND_SETUP.md",
+        "diagnostic_report_20260117_015840.json",
+        "install_monitor.py",
+        "odoo_diagnostic.py",
+        "realtime_monitor.py"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 23,
+      "lastAccessed": 1782898074277,
+      "keyFiles": [
+        "check_dashboard.py",
+        "check_orphan_models.py",
+        "cleanup_missing_models.py",
+        "cleanup_odoo_modules.ps1",
+        "cleanup_odoo_modules.sh"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 6,
+      "lastAccessed": 1782898074277,
+      "keyFiles": [
+        "App.tsx",
+        "ErrorFallback.tsx",
+        "index.css",
+        "main.css",
+        "main.tsx"
+      ]
+    },
+    "website": {
+      "path": "website",
+      "purpose": null,
+      "fileCount": 16,
+      "lastAccessed": 1782898074277,
+      "keyFiles": [
+        "DEPLOYMENT.md",
+        "DEPLOY_NETLIFY.md",
+        "index.html",
+        "index.html.backup",
+        "netlify.toml"
+      ]
+    },
+    "workers-site": {
+      "path": "workers-site",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1782898074278,
+      "keyFiles": [
+        "index.js"
+      ]
+    },
+    "dist\\assets": {
+      "path": "dist\\assets",
+      "purpose": "Static assets",
+      "fileCount": 6,
+      "lastAccessed": 1782898074283,
+      "keyFiles": [
+        "gsap-l0sNRNKZ.js",
+        "icons-l0sNRNKZ.js",
+        "motion-l0sNRNKZ.js"
+      ]
+    },
+    "src\\assets": {
+      "path": "src\\assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1782898074288,
+      "keyFiles": []
+    },
+    "src\\components": {
+      "path": "src\\components",
+      "purpose": "UI components",
+      "fileCount": 14,
+      "lastAccessed": 1782898074295,
+      "keyFiles": [
+        "AuthDialog.tsx",
+        "DeploymentMonitor.tsx",
+        "DeploymentVerificationUI.tsx"
+      ]
+    },
+    "src\\lib": {
+      "path": "src\\lib",
+      "purpose": "Library code",
+      "fileCount": 21,
+      "lastAccessed": 1782898074297,
+      "keyFiles": [
+        "company-logos.ts",
+        "deployment-verification.ts",
+        "diagnostic-center.ts"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "",
+      "accessCount": 12,
+      "lastAccessed": 1782687894799,
+      "type": "directory"
+    },
+    {
+      "path": "src\\App.tsx",
+      "accessCount": 8,
+      "lastAccessed": 1782745640585,
+      "type": "file"
+    },
+    {
+      "path": "src",
+      "accessCount": 7,
+      "lastAccessed": 1782746236503,
+      "type": "directory"
+    },
+    {
+      "path": "src\\components\\home\\HeroSection.tsx",
+      "accessCount": 7,
+      "lastAccessed": 1782746566624,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 5,
+      "lastAccessed": 1782688860342,
+      "type": "file"
+    },
+    {
+      "path": "vite.config.ts",
+      "accessCount": 4,
+      "lastAccessed": 1782690397319,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\LenisProvider.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1782688846661,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\ui\\CustomCursor.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1782690697099,
+      "type": "file"
+    },
+    {
+      "path": "index.html",
+      "accessCount": 2,
+      "lastAccessed": 1782688565955,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useLenis.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782688572609,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useGsapAnimation.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782688573563,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useScrollTrigger.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782688574473,
+      "type": "file"
+    },
+    {
+      "path": "src\\animations\\variants.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782688937578,
+      "type": "file"
+    },
+    {
+      "path": "src\\animations\\transitions.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782688938718,
+      "type": "file"
+    },
+    {
+      "path": "src\\animations\\timelines.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782688939599,
+      "type": "file"
+    },
+    {
+      "path": "src\\animations\\effects.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782688940385,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useParallax.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782689024783,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useTilt.ts",
+      "accessCount": 2,
+      "lastAccessed": 1782689026113,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\ui\\hero-landing-page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1782690114771,
+      "type": "file"
+    },
+    {
+      "path": "package-lock.json",
+      "accessCount": 1,
+      "lastAccessed": 1782687863214,
+      "type": "file"
+    },
+    {
+      "path": "tsconfig.json",
+      "accessCount": 1,
+      "lastAccessed": 1782687872551,
+      "type": "file"
+    },
+    {
+      "path": ".prettierrc",
+      "accessCount": 1,
+      "lastAccessed": 1782687880894,
+      "type": "file"
+    },
+    {
+      "path": "eslint.config.js",
+      "accessCount": 1,
+      "lastAccessed": 1782687881562,
+      "type": "file"
+    },
+    {
+      "path": "tailwind.config.js",
+      "accessCount": 1,
+      "lastAccessed": 1782687882570,
+      "type": "file"
+    },
+    {
+      "path": ".commitlintrc.js",
+      "accessCount": 1,
+      "lastAccessed": 1782687882782,
+      "type": "file"
+    },
+    {
+      "path": "src\\main.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1782687889939,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\ui\\ParticleField.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1782687901613,
+      "type": "file"
+    },
+    {
+      "path": "src\\main.css",
+      "accessCount": 1,
+      "lastAccessed": 1782687911224,
+      "type": "file"
+    },
+    {
+      "path": "src\\index.css",
+      "accessCount": 1,
+      "lastAccessed": 1782687911631,
+      "type": "file"
+    },
+    {
+      "path": "src\\styles\\theme.css",
+      "accessCount": 1,
+      "lastAccessed": 1782687911905,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useReducedMotion.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688574454,
+      "type": "file"
+    },
+    {
+      "path": "src\\lib\\gsap.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688705233,
+      "type": "file"
+    },
+    {
+      "path": "src\\animations\\easings.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688710346,
+      "type": "file"
+    },
+    {
+      "path": "src\\animations\\durations.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688713439,
+      "type": "file"
+    },
+    {
+      "path": "src\\animations\\index.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688746804,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useScrollReveal.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688762421,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useHeroTimeline.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688767863,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useMagnetic.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688777393,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useMousePosition.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688780487,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useScrollProgress.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688785922,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useViewport.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688789274,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useSectionPin.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688793494,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useSplitText.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688798822,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useSmoothScroll.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688808382,
+      "type": "file"
+    },
+    {
+      "path": "src\\hooks\\useCounter.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782688814718,
+      "type": "file"
+    },
+    {
+      "path": "src\\providers\\MotionConfig.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1782688825985,
+      "type": "file"
+    },
+    {
+      "path": "src\\providers\\index.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1782688829880,
+      "type": "file"
+    },
+    {
+      "path": "src\\styles\\fonts.css",
+      "accessCount": 1,
+      "lastAccessed": 1782688834714,
+      "type": "file"
+    },
+    {
+      "path": "src\\lib\\draw-svg.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782689974706,
+      "type": "file"
+    },
+    {
+      "path": "src\\lib\\scramble-text.ts",
+      "accessCount": 1,
+      "lastAccessed": 1782689979362,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
