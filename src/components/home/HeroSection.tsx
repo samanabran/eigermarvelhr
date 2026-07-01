@@ -670,30 +670,30 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
       onMouseLeave={() => setPaused(false)}
       aria-label="Hero — Eiger Marvel HR"
     >
-      {/* ── Slideshow background ────────────────────────────────── */}
-      <div className="absolute inset-0">
+      {/* ── Slideshow background (z-0) ───────────────────────────────── */}
+      <div className="absolute inset-0 z-0">
         <SlideshowHero seq={seq} />
       </div>
 
-      {/* ── Gradient overlays for text legibility ─────────────── */}
+      {/* ── Gradient overlays for text legibility (z-1) ─────────────── */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
             'linear-gradient(to right, rgba(7,8,15,0.75) 0%, rgba(7,8,15,0.45) 55%, rgba(7,8,15,0.1) 100%)',
         }}
       />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
             'linear-gradient(to bottom, rgba(7,8,15,0.3) 0%, transparent 40%, rgba(7,8,15,0.5) 100%)',
         }}
       />
 
-      {/* Gold ambient when hook sequence is active */}
+      {/* Gold ambient when hook sequence is active (z-2) */}
       <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-1000"
+        className="absolute inset-0 pointer-events-none transition-opacity duration-1000 z-[2]"
         style={{
           opacity: seq === 1 ? 1 : 0,
           background:
