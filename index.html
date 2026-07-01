@@ -27,7 +27,7 @@
 :root{--gold:#c9a54a;--gold-light:#e6c96a;--gold-dark:#a8893d;--bg:#070707;--bg-surface:#0e0e0e;--bg-card:#141414;--bg-glow:rgba(201,165,74,0.08);--accent-construction:#f39c12;--accent-hospitality:#3498db;--accent-events:#8e44ad;--text-primary:#f0ede6;--text-secondary:#9a9690;--text-muted:#5a5652;--success:#10b981;--border:rgba(201,165,74,0.12);--glass:rgba(255,255,255,0.06);--glass-border:rgba(201,165,74,0.18);--radius:16px;--radius-sm:10px;--shadow:0 8px 40px rgba(0,0,0,0.5);--shadow-hover:0 16px 56px rgba(0,0,0,0.7);--transition:0.5s cubic-bezier(0.22,1,0.36,1);--font-title:'Cormorant Garamond',serif;--font-base:'Outfit',sans-serif;--nav-h:72px}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{overflow-x:hidden}
-body{font-family:var(--font-base);background:var(--bg);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none!important}
+body{font-family:var(--font-base);background:var(--bg);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased}body.custom-cursor-active{cursor:none!important}
 a{color:var(--gold);text-decoration:none;transition:color 0.2s}
 a:hover{color:var(--gold-light)}
 img{max-width:100%;height:auto;display:block}
@@ -81,7 +81,7 @@ section{padding:100px 0;position:relative;overflow:hidden}
 .btn-secondary{background:transparent;color:var(--gold);border:1.5px solid var(--gold)}
 .btn-secondary:hover{background:rgba(201,165,74,0.08);transform:translateY(-3px)}
 .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
 .metric-num{font-size:clamp(28px,3.5vw,48px);font-weight:800;color:var(--gold);font-family:var(--font-title)}
 .hero{min-height:100vh;display:flex;flex-direction:column;padding:120px 0 0}
@@ -195,10 +195,12 @@ footer{padding:60px 0 30px;background:var(--bg-surface);border-top:1px solid var
 .wa-float:hover{transform:scale(1.1)translateY(-4px);box-shadow:0 8px 30px rgba(201,165,74,0.5)}
 .wa-float svg{width:24px;height:24px}
 @keyframes em-hero-progress{from{width:0%}to{width:100%}}
+@media(max-width:900px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid-3,.grid-2,.grid-4{grid-template-columns:1fr}}
 @media(max-width:768px){
 section{padding:60px 0}
 .section-head{margin-bottom:36px}
-.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+.hero{min-height:auto;padding:100px 0 0}
 .hero{min-height:auto;padding:100px 0 0}
 .hero-inner{padding:40px 0}
 .hero-actions{flex-direction:column}
@@ -264,6 +266,15 @@ section{padding:60px 0}
           <span class="badge">100% WPS Compliant</span>
           <span class="badge">7–14 Day Delivery</span>
           <span class="badge">Odoo ERP Powered</span>
+        </div>
+        <div class="trust-logos" id="sq0TrustLogos" style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06)">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.25);margin-bottom:12px;font-weight:500">Trusted by Industry Leaders</div>
+          <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center">
+            <img src="/images/company-logo.svg" alt="Partner" style="height:28px;width:auto;opacity:0.35;filter:grayscale(1);transition:opacity 0.3s" loading="lazy" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='0.35'" />
+            <img src="/images/company-logo-2.svg" alt="Partner" style="height:28px;width:auto;opacity:0.35;filter:grayscale(1);transition:opacity 0.3s" loading="lazy" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='0.35'" />
+            <img src="/images/company-logo-3.svg" alt="Partner" style="height:28px;width:auto;opacity:0.35;filter:grayscale(1);transition:opacity 0.3s" loading="lazy" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='0.35'" />
+            <img src="/images/company-logo-4.svg" alt="Partner" style="height:28px;width:auto;opacity:0.35;filter:grayscale(1);transition:opacity 0.3s" loading="lazy" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='0.35'" />
+          </div>
         </div>
       </div>
       <!-- Sequence 1 — The Hook (hidden initially) -->
@@ -366,6 +377,9 @@ section{padding:60px 0}
       <span class="kicker">Why Eiger Marvel</span>
       <h2>Outcome-Obsessed, Enterprise-Proven</h2>
       <p>We don't just provide services — we guarantee outcomes.</p>
+    </div>
+    <div class="about-team" data-anim="fadeUp" style="margin-bottom:48px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);max-width:900px;margin-left:auto;margin-right:auto">
+      <img src="/images/team-photo.png" alt="Eiger Marvel Team — UAE's expert recruitment consultants" style="width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover" loading="lazy" />
     </div>
     <div class="grid-3">
       <div class="why-card" data-anim="fadeUp"><div class="icon">🚀</div><h3>Speed</h3><p>7-14 day placements vs industry 90 days. Our recruitment engine works at startup velocity with enterprise quality.</p></div>
@@ -532,8 +546,8 @@ section{padding:60px 0}
   </div>
 </footer>
 <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-light));z-index:9999;width:0%;pointer-events:none;transition:width 0.1s linear"></div>
-<div id="cursor" style="position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 20px rgba(201,165,74,0.5);transition:width 0.2s,height 0.2s,background 0.2s"></div>
-<div id="cursor-ring" style="position:fixed;width:40px;height:40px;border:1.5px solid rgba(201,165,74,0.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s"></div>
+<div id="cursor" style="position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;box-shadow:0 0 12px rgba(201,165,74,0.6),0 0 0 1.5px rgba(255,255,255,0.15);transition:width 0.2s,height 0.2s,background 0.2s,box-shadow 0.2s"></div>
+<div id="cursor-ring" style="position:fixed;width:40px;height:40px;border:1.5px solid rgba(201,165,74,0.5);border-radius:50%;pointer-events:none;z-index:99998;transition:width 0.3s,height 0.3s,border-color 0.3s,box-shadow 0.3s"></div>
 <a href="https://wa.me/97145751100" target="_blank" rel="noopener" class="wa-float" title="Chat on WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.77 11.77 0 0012.02 0C5.41 0 .03 5.38.03 11.99c0 2.11.56 4.16 1.62 5.97L0 24l6.2-1.62a11.99 11.99 0 005.82 1.5h.01c6.61 0 12-5.38 12-12 0-3.2-1.25-6.21-3.51-8.4zM12.03 22c-1.8 0-3.56-.49-5.1-1.42l-.37-.22-3.68.97.99-3.58-.24-.37A9.93 9.93 0 012.03 12C2.03 6.49 6.51 2 12.02 2c2.67 0 5.19 1.04 7.08 2.93A9.96 9.96 0 0122.02 12c0 5.51-4.49 10-9.99 10zm5.47-7.55c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.16-.17.2-.34.22-.64.07-.3-.15-1.28-.47-2.43-1.5-.9-.8-1.52-1.78-1.7-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.66-1.6-.9-2.19-.23-.55-.47-.48-.66-.48-.17 0-.37 0-.57 0-.2 0-.53.08-.81.38-.28.3-1.06 1.03-1.06 2.5 0 1.47 1.08 2.9 1.24 3.1.15.2 2.14 3.26 5.2 4.43.73.31 1.3.5 1.75.64.73.23 1.4.2 1.93.12.58-.09 1.77-.72 2.03-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
 </a>
