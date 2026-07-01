@@ -252,21 +252,27 @@ section{padding:60px 0}
     <div class="hero-glow" id="heroGlow"></div>
     <div class="hero-grid"></div>
     <div class="hero-glow-2"></div>
-    <div class="hero-slideshow" id="heroSlideshow">
-      <div class="slide active" data-title="Burj Khalifa" style="background-image:url(/images/slides/slide-01.jpg)"></div>
-      <div class="slide" data-title="Burj Al Arab" style="background-image:url(/images/slides/slide-02.jpg)"></div>
-      <div class="slide" data-title="Sheikh Zayed Grand Mosque" style="background-image:url(/images/slides/slide-03.jpg)"></div>
-      <div class="slide" data-title="Desert Safari" style="background-image:url(/images/slides/slide-04.jpg)"></div>
-      <div class="slide" data-title="Dubai Marina" style="background-image:url(/images/slides/slide-05.jpg)"></div>
-    </div>
+<div class="hero-slideshow" id="heroSlideshow">
+  <div class="slide active" data-title="Burj Khalifa" style="background-image:url(/images/slides/slide-01.jpg)"></div>
+  <div class="slide" data-title="Burj Al Arab" style="background-image:url(/images/slides/slide-02.jpg)"></div>
+  <div class="slide" data-title="Sheikh Zayed Grand Mosque" style="background-image:url(/images/slides/slide-03.jpg)"></div>
+  <div class="slide" data-title="Desert Safari" style="background-image:url(/images/slides/slide-04.jpg)"></div>
+  <div class="slide" data-title="Dubai Marina" style="background-image:url(/images/slides/slide-05.jpg)"></div>
+  <div class="slide" data-title="Slide 6" style="background-image:url(/images/slides/slide-06.jpg)"></div>
+  <div class="slide" data-title="Slide 7" style="background-image:url(/images/slides/slide-07.jpg)"></div>
+  <div class="slide" data-title="Slide 8" style="background-image:url(/images/slides/slide-08.jpg)"></div>
+</div>
     <!-- Seq1 slideshow — Workers / Human touch -->
-    <div class="hero-slideshow" id="heroSlideshow2" style="display:none">
-      <div class="slide active" data-title="Construction Team" style="background-image:url(/images/slides2/slide2-01.jpg)"></div>
-      <div class="slide" data-title="Sunset Scaffolding" style="background-image:url(/images/slides2/slide2-02.jpg)"></div>
-      <div class="slide" data-title="Engineers Collaborating" style="background-image:url(/images/slides2/slide2-03.jpg)"></div>
-      <div class="slide" data-title="Team Reviewing Plans" style="background-image:url(/images/slides2/slide2-04.jpg)"></div>
-      <div class="slide" data-title="Site Engineer" style="background-image:url(/images/slides2/slide2-05.jpg)"></div>
-    </div>
+<div class="hero-slideshow" id="heroSlideshow2" style="display:none">
+  <div class="slide active" data-title="Construction Team" style="background-image:url(/images/slides2/slide2-01.jpg)"></div>
+  <div class="slide" data-title="Sunset Scaffolding" style="background-image:url(/images/slides2/slide2-02.jpg)"></div>
+  <div class="slide" data-title="Engineers Collaborating" style="background-image:url(/images/slides2/slide2-03.jpg)"></div>
+  <div class="slide" data-title="Team Reviewing Plans" style="background-image:url(/images/slides2/slide2-04.jpg)"></div>
+  <div class="slide" data-title="Site Engineer" style="background-image:url(/images/slides2/slide2-05.jpg)"></div>
+  <div class="slide" data-title="Slide 6" style="background-image:url(/images/slides2/slide2-06.jpg)"></div>
+  <div class="slide" data-title="Slide 7" style="background-image:url(/images/slides2/slide2-07.jpg)"></div>
+  <div class="slide" data-title="Slide 8" style="background-image:url(/images/slides2/slide2-08.jpg)"></div>
+</div>
   </div>
   <!-- Gold ambient overlay for hook sequence -->
   <div id="heroGoldGlow" style="position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse 70% 50% at 30% 50%,rgba(201,165,74,0.07) 0%,transparent 70%);z-index:1;transition:opacity 1s"></div>
@@ -603,7 +609,16 @@ function createSlideshow(containerId) {
     timer = setInterval(() => showSlide(current + 1), INTERVAL);
   }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
-  function swap() { stop(); current = 0; }
+  function swap() {
+    stop();
+    current = 0;
+    slides.forEach((s, i) => {
+      s.classList.remove('active','ken-burns');
+      gsap.set(s, {clearProps:'all'});
+    });
+    slides[0].classList.add('active','ken-burns');
+    gsap.set(slides[0], {opacity:0.35,scale:1});
+  }
   // Init first slide
   slides[0].classList.add('active','ken-burns');
   gsap.set(slides[0], {opacity:0.35});
