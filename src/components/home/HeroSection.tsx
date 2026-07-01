@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import SplitType from 'split-type'
 import { gsap } from '@/lib/gsap'
 import { Button } from '@/components/ui/button'
-import { ParticleHero } from '@/components/ui/particle-hero'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { heroTrustLogos } from '@/lib/company-logos'
 import {
@@ -18,12 +17,175 @@ import {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const ADVANCE_MS = 7500
+const SLIDE_INTERVAL = 6000
+const CROSSFADE_DURATION = 1.2
+
+const SLIDE_PATHS = Array.from({ length: 8 }, (_, i) => `/images/slides/slide-${String(i + 1).padStart(2, '0')}.jpg`)
+const SLIDE2_PATHS = Array.from({ length: 8 }, (_, i) => `/images/slides2/slide2-${String(i + 1).padStart(2, '0')}.jpg`)
 
 const GOLD = {
   base: '#B8912C',
   light: '#D4A84B',
   glow: 'rgba(184,145,44,0.35)',
   text: 'rgba(212,168,72,0.92)',
+}
+
+interface SlideshowHeroProps {
+  seq: number
+}
+
+function SlideshowHero({ seq }: SlideshowHeroProps) {
+  const container1Ref = useRef<HTMLDivElement>(null)
+  const container2Ref = useRef<HTMLDivElement>(null)
+  const timer1Ref = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const timer2Ref = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const active1Ref = useRef(0)
+  const active2Ref = useRef(0)
+  const isMountedRef = useRef(true)
+  const reducedMotion = useReducedMotion()
+
+  const getSlidePaths = (s: number) => (s === 0 ? SLIDE_PATHS : SLIDE2_PATHS)
+
+  const crossfadeTo = useCallback(
+    (slides: NodeListOf<Element>, nextIdx: number, duration: number) => {
+      const prevIdx = (nextIdx - 1 + slides.length) % slides.length
+      const prev = slides[prevIdx] as HTMLElement
+      const next = slides[nextIdx] as HTMLElement
+
+      // Kill any in-progress tweens
+      gsap.killTweensOf(prev)
+      gsap.killTweensOf(next)
+
+      next.classList.remove('ken-burns')
+      void (next as HTMLElement).offsetWidth
+      next.classList.add('ken-burns')
+
+      gsap.set(prev, { clearProps: 'all' })
+      prev.classList.remove('active', 'ken-burns')
+
+      next.classList.add('active')
+      if (!reducedMotion) {
+        gsap.fromTo(
+          next,
+          { opacity: 0, scale: 1.15 },
+          { opacity: 0.35, scale: 1, duration, ease: 'power3.out' }
+        )
+        gsap.to(prev, { opacity: 0, duration, ease: 'power3.in' })
+      } else {
+        gsap.set(next, { opacity: 0.35 })
+      }
+    },
+    [reducedMotion]
+  )
+
+  const startTimer = useCallback(
+    (containerRef: React.RefObject<HTMLDivElement | null>, activeRef: React.MutableRefObject<number>, paths: string[], seqNum: number) => {
+      const tick = () => {
+        if (!isMountedRef.current) return
+        const slides = containerRef.current?.querySelectorAll('.slide')
+        if (!slides?.length) return
+        activeRef.current = (activeRef.current + 1) % paths.length
+        crossfadeTo(slides, activeRef.current, CROSSFADE_DURATION)
+        timer1Ref.current = setTimeout(tick, SLIDE_INTERVAL)
+      }
+      timer1Ref.current = setTimeout(tick, SLIDE_INTERVAL)
+    },
+    [crossfadeTo]
+  )
+
+  useEffect(() => {
+    isMountedRef.current = true
+
+    const initSlides = (
+      containerRef: React.RefObject<HTMLDivElement | null>,
+      activeRef: React.MutableRefObject<number>,
+      paths: string[],
+      seqNum: number,
+      startImmediately: boolean
+    ) => {
+      const container = containerRef.current
+      if (!container) return
+      const slides = container.querySelectorAll('.slide')
+      if (!slides.length) return
+
+      activeRef.current = 0
+      slides[0].classList.add('active', 'ken-burns')
+      gsap.set(slides[0], { opacity: reducedMotion ? 0.35 : 0.35 })
+
+      if (startImmediately) {
+        startTimer(containerRef, activeRef, paths, seqNum)
+      }
+    }
+
+    initSlides(container1Ref, active1Ref, SLIDE_PATHS, 0, true)
+    initSlides(container2Ref, active2Ref, SLIDE2_PATHS, 1, false)
+
+    return () => {
+      isMountedRef.current = false
+      if (timer1Ref.current) clearTimeout(timer1Ref.current)
+      if (timer2Ref.current) clearTimeout(timer2Ref.current)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const c1 = container1Ref.current
+    const c2 = container2Ref.current
+    if (!c1 || !c2) return
+
+    const slides1 = c1.querySelectorAll('.slide')
+    const slides2 = c2.querySelectorAll('.slide')
+    if (!slides1.length || !slides2.length) return
+
+    if (seq === 0) {
+      c1.style.display = ''
+      c2.style.display = 'none'
+      if (timer2Ref.current) { clearTimeout(timer2Ref.current); timer2Ref.current = null }
+      if (!timer1Ref.current) {
+        active1Ref.current = (active1Ref.current) % SLIDE_PATHS.length
+        startTimer(container1Ref, active1Ref, SLIDE_PATHS, 0)
+      }
+    } else {
+      c1.style.display = 'none'
+      c2.style.display = ''
+      if (timer1Ref.current) { clearTimeout(timer1Ref.current); timer1Ref.current = null }
+      if (!timer2Ref.current) {
+        active2Ref.current = (active2Ref.current) % SLIDE2_PATHS.length
+        startTimer(container2Ref, active2Ref, SLIDE2_PATHS, 1)
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seq])
+
+  return (
+    <>
+      <style>{`
+        .slideshow-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none }
+        .slideshow-container .slide {
+          position: absolute; inset: 0;
+          background-size: cover; background-position: center;
+          opacity: 0; z-index: 0;
+        }
+        .slideshow-container .slide.active { opacity: 0.35; z-index: 1; }
+        .slideshow-container .slide.ken-burns { animation: kenBurns 12s ease-out forwards; }
+        @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.12); } }
+      `}</style>
+
+      {/* Seq0 slideshow — UAE landmarks */}
+      <div ref={container1Ref} className="slideshow-container" style={{ display: '' }}>
+        {SLIDE_PATHS.map((src, i) => (
+          <div key={src} className="slide" style={{ backgroundImage: `url('${src}')` }} />
+        ))}
+      </div>
+
+      {/* Seq1 slideshow — workers/industry */}
+      <div ref={container2Ref} className="slideshow-container" style={{ display: 'none' }}>
+        {SLIDE2_PATHS.map((src, i) => (
+          <div key={src} className="slide" style={{ backgroundImage: `url('${src}')` }} />
+        ))}
+      </div>
+    </>
+  )
 }
 
 // ─── Sequence definitions ─────────────────────────────────────────────────────
@@ -508,9 +670,9 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
       onMouseLeave={() => setPaused(false)}
       aria-label="Hero — Eiger Marvel HR"
     >
-      {/* ── Canvas background ─────────────────────────────────── */}
+      {/* ── Slideshow background ────────────────────────────────── */}
       <div className="absolute inset-0">
-        <ParticleHero goldMode={currentSeq.goldMode} />
+        <SlideshowHero seq={seq} />
       </div>
 
       {/* ── Gradient overlays for text legibility ─────────────── */}
