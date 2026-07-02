@@ -3,7 +3,7 @@
 import { useRef, useEffect, useCallback } from 'react'
 import { gsap } from '@/lib/gsap'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
-import { AwardBadge } from '@/components/ui/award'
+import { Awards } from '@/components/ui/award'
 
 interface BadgeItem {
   title: string
@@ -89,7 +89,7 @@ function MarqueeTrack({
         style={{ willChange: 'transform' }}
       >
         {doubled.map((item, i) => (
-          <AwardBadge
+          <Awards
             key={`${item.title}-${i}`}
             title={item.title}
             subtitle={item.subtitle}
