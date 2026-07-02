@@ -8,6 +8,6 @@
     { "source": "/images/(.*)", "destination": "/images/$1" },
     { "source": "/videos/(.*)", "destination": "/videos/$1" },
     { "source": "/src/pages/index", "destination": "/src/pages/index" },
-    { "source": "/(.*)", "destination": "/src/pages/index" }
+    { "source": "/(.*)", "destination": "/src/pages/index.html" }
   ]
 }
