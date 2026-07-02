@@ -158,7 +158,7 @@ export function Awards({
         )}
       >
         <svg
-          className={cn("fill-primary absolute top-1/2 h-full w-full -translate-y-1/2")}
+          className={cn("fill-amber-300 absolute top-1/2 h-full w-full -translate-y-1/2 opacity-90")}
           width="892.77"
           height="688.08"
           viewBox="0 0 892.77 688.08"
