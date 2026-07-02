@@ -18,6 +18,11 @@ import { StatsSection } from '@/components/home/StatsSection'
 import { PremiumSection } from '@/components/home/PremiumSection'
 import { JobsPage } from '@/components/pages/JobsPage'
 import { PrivacyPolicyPage } from '@/components/pages/PrivacyPolicyPage'
+import { HowItWorksPage } from '@/components/pages/HowItWorksPage'
+import { IndustriesPages } from '@/components/pages/IndustriesPages'
+import { PricingPage } from '@/components/pages/PricingPage'
+import { InsightsPage } from '@/components/pages/InsightsPage'
+import { HealthCheckPage } from '@/components/pages/HealthCheckPage'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { LoadingScreen } from '@/components/ui/LoadingScreen'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
@@ -280,86 +285,24 @@ function App() {
           />
         )}
 
-        {currentPage === 'employers' && (
-          <div className="min-h-screen bg-gradient-to-br from-secondary via-background to-secondary py-16 px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h1 className="text-4xl sm:text-5xl font-bold mb-4">Employer Portal</h1>
-                <p className="text-lg text-muted-foreground mb-6">
-                  Post jobs, review AI-matched candidates, and hire top talent across the MENA region.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-card p-8 rounded-lg border border-border shadow-md hover:shadow-lg transition-shadow">
-                  <h2 className="text-2xl font-bold mb-4">Post a Job</h2>
-                  <p className="text-muted-foreground mb-4">Reach thousands of qualified candidates and find your perfect match.</p>
-                  <ul className="space-y-2 text-sm text-muted-foreground mb-6">
-                    <li>✓ Unlimited job postings</li>
-                    <li>✓ AI-powered candidate matching</li>
-                    <li>✓ Applicant tracking system</li>
-                    <li>✓ Analytics dashboard</li>
-                  </ul>
-                  <button 
-                    onClick={() => toast.info('Job posting feature coming soon')}
-                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold py-2 px-4 rounded-lg transition-all"
-                  >
-                    Post a Job
-                  </button>
-                </div>
-
-                <div className="bg-card p-8 rounded-lg border border-border shadow-md hover:shadow-lg transition-shadow">
-                  <h2 className="text-2xl font-bold mb-4">Learn More</h2>
-                  <p className="text-muted-foreground mb-4">Contact our team to discuss your hiring needs.</p>
-                  <div className="space-y-4 mb-6">
-                    <div>
-                      <p className="font-semibold text-foreground">Phone</p>
-                      <a href="tel:+97145751100" className="text-accent hover:underline">+971 4 575 1100</a>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground">Email</p>
-                      <a href="mailto:employers@eigermarvelhr.com" className="text-accent hover:underline">employers@eigermarvelhr.com</a>
-                    </div>
-                  </div>
-                  <button 
-                    onClick={() => setCurrentPage('contact')}
-                    className="w-full border border-accent text-accent hover:bg-accent/10 font-semibold py-2 px-4 rounded-lg transition-all"
-                  >
-                    Contact Us
-                  </button>
-                </div>
-              </div>
-
-              <div className="bg-card p-8 rounded-lg border border-border">
-                <h2 className="text-2xl font-bold mb-4">Featured Benefits</h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div>
-                    <div className="text-4xl font-bold text-accent mb-2">AI</div>
-                    <p className="font-semibold mb-2">Smart Matching</p>
-                    <p className="text-sm text-muted-foreground">Our AI matches your requirements with top candidates automatically.</p>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-bold text-accent mb-2">24/7</div>
-                    <p className="font-semibold mb-2">24/7 Support</p>
-                    <p className="text-sm text-muted-foreground">Dedicated support team available round the clock for all your needs.</p>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-bold text-accent mb-2">📊</div>
-                    <p className="font-semibold mb-2">Analytics</p>
-                    <p className="text-sm text-muted-foreground">Comprehensive insights into your hiring pipeline and performance metrics.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {currentPage === 'how-it-works' && (
+          <HowItWorksPage onNavigate={setCurrentPage} />
         )}
 
-        {currentPage === 'talenttech' && (
-          <div className="min-h-screen bg-gradient-to-br from-secondary via-background to-secondary">
-            <div className="py-16">
-              <TalentTechSection />
-            </div>
-          </div>
+        {currentPage === 'industries-page' && (
+          <IndustriesPages onNavigate={setCurrentPage} />
+        )}
+
+        {currentPage === 'pricing' && (
+          <PricingPage />
+        )}
+
+        {currentPage === 'insights' && (
+          <InsightsPage />
+        )}
+
+        {currentPage === 'health-check' && (
+          <HealthCheckPage />
         )}
 
         {currentPage === 'contact' && (

@@ -3,48 +3,73 @@
 import { useRef, useEffect, useCallback } from 'react'
 import { gsap } from '@/lib/gsap'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
-import { partnerLogos, type PartnerLogo } from '@/lib/company-logos'
 
-const cloudinaryLogos: PartnerLogo[] = [
-  { name: 'UAE Enterprise Client', src: 'https://res.cloudinary.com/dsl5fhclj/image/upload/v1768167980/pi5au781emmzlrkhkrdz.png' },
-  { name: 'UAE Enterprise Client', src: 'https://res.cloudinary.com/dsl5fhclj/image/upload/v1768167979/tw61y7zrf7gm8hpayl3l.png' },
-  { name: 'UAE Enterprise Client', src: 'https://res.cloudinary.com/dsl5fhclj/image/upload/v1768167979/av0n5tdsx4o2z2ozqovj.png' },
-  { name: 'UAE Enterprise Client', src: 'https://res.cloudinary.com/dsl5fhclj/image/upload/v1768167979/atxw0ilmdrbmbgtwwhgo.png' },
+interface ComplianceBadge {
+  name: string
+  description: string
+  icon: string
+}
+
+const complianceBadges: ComplianceBadge[] = [
+  { name: 'MOHRE Registered', description: 'Ministry of Human Resources & Emiratisation', icon: '⚖️' },
+  { name: 'WPS Compliant', description: 'Wage Protection System Certified', icon: '🛡️' },
+  { name: 'ISO 9001:2024', description: 'Quality Management Certified', icon: '✓' },
+  { name: 'Dubai Chamber', description: 'Dubai Chamber of Commerce Member', icon: '🏛️' },
+  { name: 'KHDA Approved', description: 'Knowledge & Human Development Authority', icon: '📜' },
+  { name: 'Great Place to Work', description: 'Workplace Excellence Certified 2026', icon: '⭐' },
+  { name: 'Odoo Gold Partner', description: 'Official Odoo ERP Implementation Partner', icon: '🔧' },
+  { name: 'UAE Labour Law', description: 'Full UAE Labour Law Compliance', icon: '📋' },
+  { name: 'GDPR Compliant', description: 'Data Protection & Privacy Certified', icon: '🔒' },
+  { name: 'GCC Licensed', description: 'GCC-Wide Recruitment Licensed', icon: '🌐' },
+  { name: 'Tawteen Partner', description: 'UAE National Talent Development', icon: '🇦🇪' },
+  { name: 'ICV Certified', description: 'In-Country Value Program Participant', icon: '📈' },
 ]
 
-const allLogos = [...partnerLogos, ...cloudinaryLogos]
-const row1Logos = allLogos.slice(0, 8)
-const row2Logos = allLogos.slice(8)
+const row1Badges = complianceBadges.slice(0, 6)
+const row2Badges = complianceBadges.slice(6)
 
-// ─── Logo tile ────────────────────────────────────────────────────────────────
-function LogoTile({ logo }: { logo: PartnerLogo }) {
+// ─── Badge tile ───────────────────────────────────────────────────────────────
+function BadgeTile({ badge }: { badge: ComplianceBadge }) {
   return (
-    <div className="flex-shrink-0 group" style={{ width: 88, height: 88 }}>
+    <div className="flex-shrink-0 group" style={{ width: 160, height: 100 }}>
       <div
-        className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center"
+        className="w-full h-full rounded-xl overflow-hidden flex items-center gap-3 px-4"
         style={{
-          background: 'rgba(255,255,255,0.022)',
-          border: '1px solid rgba(255,255,255,0.055)',
+          background: 'rgba(255,255,255,0.03)',
+          border: '1px solid rgba(184,145,44,0.15)',
           transition: 'border-color 0.3s ease, background 0.3s ease',
         }}
         onMouseEnter={e => {
           const el = e.currentTarget as HTMLElement
-          el.style.borderColor = 'rgba(184,145,44,0.4)'
-          el.style.background = 'rgba(184,145,44,0.06)'
+          el.style.borderColor = 'rgba(184,145,44,0.5)'
+          el.style.background = 'rgba(184,145,44,0.08)'
         }}
         onMouseLeave={e => {
           const el = e.currentTarget as HTMLElement
-          el.style.borderColor = 'rgba(255,255,255,0.055)'
-          el.style.background = 'rgba(255,255,255,0.022)'
+          el.style.borderColor = 'rgba(184,145,44,0.15)'
+          el.style.background = 'rgba(255,255,255,0.03)'
         }}
       >
-        <img
-          src={logo.src}
-          alt={`${logo.name} — Eiger Marvel HR client`}
-          className="w-full h-full object-contain p-1.5 opacity-55 group-hover:opacity-92 transition-opacity duration-300"
-          loading="lazy"
-          decoding="async"
-        />
+        <span className="text-2xl flex-shrink-0">{badge.icon}</span>
+        <div className="min-w-0">
+          <div
+            className="text-sm font-bold truncate"
+            style={{
+              background: 'linear-gradient(135deg, #D4A84B 0%, #F5E6B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            {badge.name}
+          </div>
+          <div
+            className="text-[10px] truncate mt-0.5"
+            style={{ color: 'rgba(156,163,175,0.6)' }}
+          >
+            {badge.description}
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -52,13 +77,13 @@ function LogoTile({ logo }: { logo: PartnerLogo }) {
 
 // ─── Marquee track ────────────────────────────────────────────────────────────
 function MarqueeTrack({
-  logos,
+  badges,
   reverse = false,
   speed = 52,
   reducedMotion,
   onTweenReady,
 }: {
-  logos: PartnerLogo[]
+  badges: ComplianceBadge[]
   reverse?: boolean
   speed?: number
   reducedMotion: boolean
@@ -102,7 +127,7 @@ function MarqueeTrack({
     }
   }, [reverse, speed, reducedMotion, onTweenReady])
 
-  const doubled = [...logos, ...logos]
+  const doubled = [...badges, ...badges]
 
   return (
     <div className="overflow-hidden">
@@ -111,8 +136,8 @@ function MarqueeTrack({
         className="flex gap-3 items-center py-1.5"
         style={{ willChange: 'transform' }}
       >
-        {doubled.map((logo, i) => (
-          <LogoTile key={`${logo.name}-${i}`} logo={logo} />
+        {doubled.map((badge, i) => (
+          <BadgeTile key={`${badge.name}-${i}`} badge={badge} />
         ))}
       </div>
     </div>
@@ -196,7 +221,7 @@ export function TrustedCompaniesSection() {
             className="text-xs uppercase tracking-[0.18em] font-medium"
             style={{ color: 'rgba(184,145,44,0.75)' }}
           >
-            Our Clients
+            Credentials & Compliance
           </span>
           <span className="h-px w-8 block" style={{ background: 'rgba(184,145,44,0.55)' }} />
         </div>
@@ -210,7 +235,7 @@ export function TrustedCompaniesSection() {
             letterSpacing: '-0.02em',
           }}
         >
-          Trusted by UAE&apos;s Leading Enterprises
+          Certified & Compliant
         </h2>
 
         <p
@@ -218,7 +243,7 @@ export function TrustedCompaniesSection() {
           className="font-body"
           style={{ color: 'rgba(156,163,175,0.6)', fontSize: '0.9rem' }}
         >
-          40+ active hiring partners — government authorities to global brands
+          UAE government-registered with full WPS, MOHRE & ISO compliance — every placement guaranteed
         </p>
       </div>
 
@@ -235,7 +260,7 @@ export function TrustedCompaniesSection() {
             style={{ background: 'linear-gradient(-90deg, #0A0A0E, transparent)' }}
           />
           <MarqueeTrack
-            logos={row1Logos}
+            badges={row1Badges}
             reverse={false}
             speed={55}
             reducedMotion={reducedMotion}
@@ -254,7 +279,7 @@ export function TrustedCompaniesSection() {
             style={{ background: 'linear-gradient(-90deg, #0A0A0E, transparent)' }}
           />
           <MarqueeTrack
-            logos={row2Logos}
+            badges={row2Badges}
             reverse={true}
             speed={48}
             reducedMotion={reducedMotion}
@@ -267,9 +292,9 @@ export function TrustedCompaniesSection() {
       <div className="mt-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
         <div className="flex items-center justify-center gap-8 sm:gap-14 flex-wrap">
           {[
-            { val: '40+',      label: 'Enterprise Clients' },
-            { val: 'UAE & GCC', label: 'Geographic Reach' },
-            { val: '100%',     label: 'WPS Compliant' },
+            { val: '12+',      label: 'UAE Certifications' },
+            { val: '100%',     label: 'WPS & MOHRE Compliant' },
+            { val: '3', label: 'Active Regulatory Registrations' },
           ].map((item) => (
             <div key={item.val} className="text-center">
               <div

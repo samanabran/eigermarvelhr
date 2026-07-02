@@ -19,10 +19,11 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
 
   const baseNavItems = [
     { label: 'Home', value: 'home' },
-    { label: 'Jobs', value: 'jobs' },
-    { label: 'For Employers', value: 'employers' },
-    { label: 'TalentTech', value: 'talenttech', badge: 'Coming Soon' },
-    { label: 'Contact', value: 'contact' }
+    { label: 'How It Works', value: 'how-it-works' },
+    { label: 'Industries', value: 'industries' },
+    { label: 'Pricing', value: 'pricing' },
+    { label: 'Insights', value: 'insights' },
+    { label: 'Health Check', value: 'health-check' },
   ]
 
   const candidateNavItems = [
