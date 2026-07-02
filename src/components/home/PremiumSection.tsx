@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { CrownSimple, Check, X, Sparkles } from '@phosphor-icons/react'
+import { CrownSimple, Check, X, Sparkle } from '@phosphor-icons/react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -183,7 +183,7 @@ export function PremiumSection({ onUpgrade }: PremiumSectionProps) {
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  <Sparkles size={16} weight="fill" />
+                  <Sparkle size={16} weight="fill" />
                   Upgrade to Premium
                 </span>
               </button>

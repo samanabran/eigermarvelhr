@@ -10,7 +10,7 @@ import { heroTrustLogos } from '@/lib/company-logos'
 import {
   CalendarCheck,
   ArrowRight,
-  ChevronDown,
+  CaretDown,
   Buildings,
   UserCircle,
 } from '@phosphor-icons/react'
@@ -792,7 +792,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
                 style={{ color: 'rgba(255,255,255,0.25)' }}
                 aria-label="Scroll down"
               >
-                <ChevronDown size={20} />
+                <CaretDown size={20} />
               </motion.div>
             </div>
           </div>
