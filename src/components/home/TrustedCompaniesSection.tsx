@@ -3,87 +3,39 @@
 import { useRef, useEffect, useCallback } from 'react'
 import { gsap } from '@/lib/gsap'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { AwardBadge } from '@/components/ui/award'
 
-interface ComplianceBadge {
-  name: string
-  description: string
-  icon: string
+interface BadgeItem {
+  title: string
+  subtitle: string
+  level: 'bronze' | 'silver' | 'gold' | 'platinum'
+  variant: 'stamp' | 'award' | 'certificate' | 'badge' | 'sticker' | 'id-card'
 }
 
-const complianceBadges: ComplianceBadge[] = [
-  { name: 'MOHRE Registered', description: 'Ministry of Human Resources & Emiratisation', icon: '⚖️' },
-  { name: 'WPS Compliant', description: 'Wage Protection System Certified', icon: '🛡️' },
-  { name: 'ISO 9001:2024', description: 'Quality Management Certified', icon: '✓' },
-  { name: 'Dubai Chamber', description: 'Dubai Chamber of Commerce Member', icon: '🏛️' },
-  { name: 'KHDA Approved', description: 'Knowledge & Human Development Authority', icon: '📜' },
-  { name: 'Great Place to Work', description: 'Workplace Excellence Certified 2026', icon: '⭐' },
-  { name: 'Odoo Gold Partner', description: 'Official Odoo ERP Implementation Partner', icon: '🔧' },
-  { name: 'UAE Labour Law', description: 'Full UAE Labour Law Compliance', icon: '📋' },
-  { name: 'GDPR Compliant', description: 'Data Protection & Privacy Certified', icon: '🔒' },
-  { name: 'GCC Licensed', description: 'GCC-Wide Recruitment Licensed', icon: '🌐' },
-  { name: 'Tawteen Partner', description: 'UAE National Talent Development', icon: '🇦🇪' },
-  { name: 'ICV Certified', description: 'In-Country Value Program Participant', icon: '📈' },
+const awards: BadgeItem[] = [
+  { title: 'UAE Top Recruiter 2024', subtitle: 'Gulf Business Awards',       level: 'gold',     variant: 'award' },
+  { title: 'MOHRE Licensed',         subtitle: 'Ministry of Human Resources', level: 'platinum', variant: 'stamp' },
+  { title: 'WPS Compliant',          subtitle: 'Wage Protection System',      level: 'gold',     variant: 'badge' },
+  { title: 'ISO 9001:2024',          subtitle: 'Quality Management',          level: 'silver',   variant: 'certificate' },
+  { title: 'Best HR Consultancy',    subtitle: 'GCC Business Awards 2025',    level: 'gold',     variant: 'award' },
+  { title: 'KHDA Accredited',        subtitle: 'Dubai Knowledge Authority',   level: 'silver',   variant: 'stamp' },
+  { title: 'Great Place to Work UAE', subtitle: 'Workplace Excellence 2026',  level: 'gold',     variant: 'badge' },
+  { title: 'Dubai Chamber Approved', subtitle: 'Chamber of Commerce Member',  level: 'platinum', variant: 'id-card' },
+  { title: 'Excellence in Recruitment', subtitle: 'HR Summit Middle East',    level: 'gold',     variant: 'award' },
+  { title: 'Odoo Gold Partner',      subtitle: 'ERP Implementation',          level: 'gold',     variant: 'badge' },
+  { title: 'Fastest Growing HR Firm',subtitle: 'SME Awards UAE 2025',         level: 'silver',   variant: 'sticker' },
+  { title: 'Tawteen Partner',        subtitle: 'UAE National Development',    level: 'bronze',   variant: 'stamp' },
 ]
-
-const row1Badges = complianceBadges.slice(0, 6)
-const row2Badges = complianceBadges.slice(6)
-
-// ─── Badge tile ───────────────────────────────────────────────────────────────
-function BadgeTile({ badge }: { badge: ComplianceBadge }) {
-  return (
-    <div className="flex-shrink-0 group" style={{ width: 160, height: 100 }}>
-      <div
-        className="w-full h-full rounded-xl overflow-hidden flex items-center gap-3 px-4"
-        style={{
-          background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(184,145,44,0.15)',
-          transition: 'border-color 0.3s ease, background 0.3s ease',
-        }}
-        onMouseEnter={e => {
-          const el = e.currentTarget as HTMLElement
-          el.style.borderColor = 'rgba(184,145,44,0.5)'
-          el.style.background = 'rgba(184,145,44,0.08)'
-        }}
-        onMouseLeave={e => {
-          const el = e.currentTarget as HTMLElement
-          el.style.borderColor = 'rgba(184,145,44,0.15)'
-          el.style.background = 'rgba(255,255,255,0.03)'
-        }}
-      >
-        <span className="text-2xl flex-shrink-0">{badge.icon}</span>
-        <div className="min-w-0">
-          <div
-            className="text-sm font-bold truncate"
-            style={{
-              background: 'linear-gradient(135deg, #D4A84B 0%, #F5E6B8 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            {badge.name}
-          </div>
-          <div
-            className="text-[10px] truncate mt-0.5"
-            style={{ color: 'rgba(156,163,175,0.6)' }}
-          >
-            {badge.description}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 // ─── Marquee track ────────────────────────────────────────────────────────────
 function MarqueeTrack({
-  badges,
+  items,
   reverse = false,
   speed = 52,
   reducedMotion,
   onTweenReady,
 }: {
-  badges: ComplianceBadge[]
+  items: BadgeItem[]
   reverse?: boolean
   speed?: number
   reducedMotion: boolean
@@ -127,7 +79,7 @@ function MarqueeTrack({
     }
   }, [reverse, speed, reducedMotion, onTweenReady])
 
-  const doubled = [...badges, ...badges]
+  const doubled = [...items, ...items]
 
   return (
     <div className="overflow-hidden">
@@ -136,8 +88,14 @@ function MarqueeTrack({
         className="flex gap-3 items-center py-1.5"
         style={{ willChange: 'transform' }}
       >
-        {doubled.map((badge, i) => (
-          <BadgeTile key={`${badge.name}-${i}`} badge={badge} />
+        {doubled.map((item, i) => (
+          <AwardBadge
+            key={`${item.title}-${i}`}
+            title={item.title}
+            subtitle={item.subtitle}
+            level={item.level}
+            variant={item.variant}
+          />
         ))}
       </div>
     </div>
@@ -148,8 +106,7 @@ function MarqueeTrack({
 export function TrustedCompaniesSection() {
   const sectionRef  = useRef<HTMLDivElement>(null)
   const headerRef   = useRef<HTMLDivElement>(null)
-  const row1WrapRef = useRef<HTMLDivElement>(null)
-  const row2WrapRef = useRef<HTMLDivElement>(null)
+  const marqueeWrap = useRef<HTMLDivElement>(null)
   const tweensRef   = useRef<gsap.core.Tween[]>([])
   const reducedMotion = useReducedMotion()
 
@@ -170,11 +127,11 @@ export function TrustedCompaniesSection() {
       )
 
       gsap.fromTo(
-        [row1WrapRef.current, row2WrapRef.current],
+        marqueeWrap.current,
         { opacity: 0 },
         {
           opacity: 1,
-          duration: 0.9, stagger: 0.18, ease: 'power2.out',
+          duration: 0.9, ease: 'power2.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 82%', once: true },
         }
       )
@@ -221,21 +178,21 @@ export function TrustedCompaniesSection() {
             className="text-xs uppercase tracking-[0.18em] font-medium"
             style={{ color: 'rgba(184,145,44,0.75)' }}
           >
-            Credentials & Compliance
+            Awards & Recognition
           </span>
           <span className="h-px w-8 block" style={{ background: 'rgba(184,145,44,0.55)' }} />
         </div>
 
         <h2
           data-reveal
-          className="font-display font-light mb-2"
+          className="font-heading font-light mb-2"
           style={{
             fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
             color: '#F4F4F5',
             letterSpacing: '-0.02em',
           }}
         >
-          Certified & Compliant
+          On Our Way to UAE&apos;s Top Recruiter
         </h2>
 
         <p
@@ -243,14 +200,13 @@ export function TrustedCompaniesSection() {
           className="font-body"
           style={{ color: 'rgba(156,163,175,0.6)', fontSize: '0.9rem' }}
         >
-          UAE government-registered with full WPS, MOHRE & ISO compliance — every placement guaranteed
+          Industry awards, government licenses, and compliance certifications earned on our journey
         </p>
       </div>
 
-      {/* ── Dual marquee ───────────────────────────────────────── */}
+      {/* ── Single marquee ─────────────────────────────────────── */}
       <div className="space-y-3">
-        {/* Row 1 — scrolls left */}
-        <div ref={row1WrapRef} className="relative" style={{ opacity: 0 }}>
+        <div ref={marqueeWrap} className="relative" style={{ opacity: 0 }}>
           <div
             className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
             style={{ background: 'linear-gradient(90deg, #0A0A0E, transparent)' }}
@@ -260,28 +216,9 @@ export function TrustedCompaniesSection() {
             style={{ background: 'linear-gradient(-90deg, #0A0A0E, transparent)' }}
           />
           <MarqueeTrack
-            badges={row1Badges}
+            items={awards}
             reverse={false}
-            speed={55}
-            reducedMotion={reducedMotion}
-            onTweenReady={registerTween}
-          />
-        </div>
-
-        {/* Row 2 — scrolls right */}
-        <div ref={row2WrapRef} className="relative" style={{ opacity: 0 }}>
-          <div
-            className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(90deg, #0A0A0E, transparent)' }}
-          />
-          <div
-            className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(-90deg, #0A0A0E, transparent)' }}
-          />
-          <MarqueeTrack
-            badges={row2Badges}
-            reverse={true}
-            speed={48}
+            speed={60}
             reducedMotion={reducedMotion}
             onTweenReady={registerTween}
           />
@@ -292,9 +229,9 @@ export function TrustedCompaniesSection() {
       <div className="mt-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
         <div className="flex items-center justify-center gap-8 sm:gap-14 flex-wrap">
           {[
-            { val: '12+',      label: 'UAE Certifications' },
+            { val: '12+',      label: 'Awards & Certifications' },
             { val: '100%',     label: 'WPS & MOHRE Compliant' },
-            { val: '3', label: 'Active Regulatory Registrations' },
+            { val: 'Sprint to', label: 'Top UAE Recruiter' },
           ].map((item) => (
             <div key={item.val} className="text-center">
               <div
