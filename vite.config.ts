@@ -24,6 +24,9 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    rollupOptions: {
+      input: resolve(projectRoot, 'src/pages/index.html'),
+    },
     chunkSizeWarningLimit: 800,
     minify: 'terser',
   },
