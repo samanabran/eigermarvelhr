@@ -130,7 +130,7 @@ export function HeroVideoPlayer({
         title="Eiger Marvel hero video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
-        className="absolute inset-0 w-full h-full border-0 object-cover"
+        className="absolute inset-0 w-full h-full border-0"
         style={{ pointerEvents: 'none' }}
       />
 
