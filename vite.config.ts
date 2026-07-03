@@ -29,10 +29,9 @@ export default defineConfig({
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'gsap-vendor': ['gsap'],
-          'motion-vendor': ['framer-motion', 'motion'],
-          'animation-vendor': ['lottie-react', 'animejs'],
-          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei', '@react-three/postprocessing'],
-          'icons-vendor': ['@heroicons/react', 'lucide-react', '@phosphor-icons/react'],
+          'motion-vendor': ['framer-motion'],
+          'three-vendor': ['three', '@react-three/fiber'],
+          'icons-vendor': ['lucide-react', '@phosphor-icons/react'],
         },
       },
     },
