@@ -226,7 +226,7 @@ class DiagnosticCenter {
         lastClear: new Date().toISOString(),
       },
       sync: {
-        syncStatus: syncManager.isSyncing() ? 'active' : 'idle',
+        syncStatus: (syncManager as any).isSyncing?.() ? 'active' : 'idle',
         lastSyncTime: new Date().toISOString(),
         syncDuration: 5000,
         itemsSynced: Object.values(odooRecords).reduce((a, b) => a + b, 0),

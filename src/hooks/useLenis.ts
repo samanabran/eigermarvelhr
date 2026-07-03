@@ -93,7 +93,7 @@ export function useLenis(options: UseLenisOptions = {}) {
 
   const on = useCallback(
     (event: string, callback: (...args: unknown[]) => void) => {
-      lenisRef.current?.on(event, callback)
+      lenisRef.current?.on(event as 'scroll', callback)
     },
     []
   )

@@ -57,7 +57,7 @@ class SyncManager {
     failureCount: 0,
   };
 
-  private syncTimer: NodeJS.Timeout | null = null;
+  private syncTimer: ReturnType<typeof setInterval> | null = null;
   private eventListeners: Set<SyncEventListener> = new Set();
 
   /**
@@ -447,7 +447,7 @@ class SyncManager {
         for (const app of data.applications) {
           await odooService.createJobApplicant({
             name: app.candidateName,
-            email: app.email,
+            email_from: app.email,
             phone: app.phone,
             job_id: app.jobId,
             description: app.coverLetter,

@@ -21,7 +21,7 @@ export function useSmoothScroll() {
   )
 
   const scrollToTop = useCallback(
-    (options: ScrollToOptions = {}) => scrollToElement(0, options),
+    (options: ScrollToOptions = {}) => scrollToElement('html', options),
     [scrollToElement]
   )
 

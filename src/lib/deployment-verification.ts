@@ -6,6 +6,7 @@
 import odooService from './odoo-service';
 import syncManager from './sync-manager';
 import integrationTests from './odoo-integration-tests';
+declare const process: { version: string; platform: string; cwd: () => string }
 import {
   OdooJob,
   OdooJobApplicant,
