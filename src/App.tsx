@@ -12,6 +12,7 @@ import { HeroSection } from '@/components/home/HeroSection'
 import { StatsSection } from '@/components/home/StatsSection'
 import { ServicesSection } from '@/components/home/ServicesSection'
 import { IndustriesSection } from '@/components/home/IndustriesSection'
+import odooService from '@/lib/odoo-service'
 
 const CandidateDashboard = lazy(() =>
   import('@/components/pages/CandidateDashboard').then((m) => ({ default: m.CandidateDashboard }))
@@ -482,14 +483,29 @@ function App() {
                 {/* Contact Form */}
                 <div className="bg-card p-8 rounded-lg border border-border shadow-md">
                   <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
-                  <form className="space-y-4" onSubmit={(e) => {
+                  <form className="space-y-4" onSubmit={async (e) => {
                     e.preventDefault()
-                    toast.success('Thank you for your message! We will get back to you soon.')
+                    const form = e.currentTarget
+                    const data = new FormData(form)
+                    const payload = {
+                      contact_name: data.get('name') as string,
+                      email_from: data.get('email') as string,
+                      name: `[Website Lead] ${data.get('subject') as string}`,
+                      description: data.get('message') as string,
+                    }
+                    try {
+                      await odooService.createCrmLead(payload)
+                      toast.success('Thank you! Your message has been received. We will get back to you within 24 hours.')
+                      form.reset()
+                    } catch {
+                      toast.error('Could not send message. Please email us directly at info@eigermarvelhr.com.')
+                    }
                   }}>
                     <div>
                       <label className="block text-sm font-medium mb-2">Name</label>
                       <input 
                         type="text"
+                        name="name"
                         required
                         className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
                         placeholder="Your name"
@@ -499,6 +515,7 @@ function App() {
                       <label className="block text-sm font-medium mb-2">Email</label>
                       <input 
                         type="email"
+                        name="email"
                         required
                         className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
                         placeholder="your@email.com"
@@ -508,6 +525,7 @@ function App() {
                       <label className="block text-sm font-medium mb-2">Subject</label>
                       <input 
                         type="text"
+                        name="subject"
                         required
                         className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
                         placeholder="Message subject"
@@ -516,6 +534,7 @@ function App() {
                     <div>
                       <label className="block text-sm font-medium mb-2">Message</label>
                       <textarea 
+                        name="message"
                         required
                         rows={4}
                         className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background resize-none"

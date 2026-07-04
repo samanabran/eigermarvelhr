@@ -127,15 +127,14 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => onAuthClick('login')}
+                  onClick={() => window.location.href = 'https://erp.eigermarvelhr.com/web/login'}
                   className="text-primary-foreground hover:text-accent hover:bg-accent/10 font-semibold transition-all text-xs sm:text-sm whitespace-nowrap"
-                  data-auth="login"
                 >
                   Login
                 </Button>
                 <Button 
                   size="sm"
-                  onClick={() => onAuthClick('register')}
+                  onClick={() => onNavigate('contact')}
                   className="bg-gradient-to-r from-accent to-accent/90 text-accent-foreground hover:from-accent/90 hover:to-accent/80 font-semibold shadow-md hover:shadow-xl transition-all hover:scale-105 text-xs sm:text-sm whitespace-nowrap"
                   data-auth="register"
                 >
@@ -206,18 +205,16 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
                       variant="outline"
                       size="sm"
                       onClick={() => {
-                        onAuthClick('login')
-                        setMobileMenuOpen(false)
+                        window.location.href = 'https://erp.eigermarvelhr.com/web/login'
                       }}
                       className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
-                      data-auth="login"
                     >
                       Login
                     </Button>
                     <Button 
                       size="sm"
                       onClick={() => {
-                        onAuthClick('register')
+                        onNavigate('contact')
                         setMobileMenuOpen(false)
                       }}
                       className="bg-gradient-to-r from-accent to-accent/90 text-accent-foreground hover:from-accent/90 hover:to-accent/80 font-semibold shadow-md"

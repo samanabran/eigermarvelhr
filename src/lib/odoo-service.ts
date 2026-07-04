@@ -281,6 +281,35 @@ class OdooService {
   }
 
   /**
+   * Create CRM lead from contact form submission
+   */
+  async createCrmLead(data: {
+    contact_name: string;
+    email_from: string;
+    phone?: string;
+    name: string;      // subject / opportunity title
+    description: string;
+  }): Promise<number> {
+    try {
+      await this.ensureConnection();
+
+      const leadId = await this.connection!.rpcCall<number>(
+        ODOO_MODELS.CRM_LEAD,
+        'create',
+        [data],
+      );
+
+      console.log(`[OdooService] Created CRM lead with ID: ${leadId}`);
+      this.logSync('CrmLead', leadId, 'create', 'success');
+      return leadId;
+    } catch (error) {
+      this.logSync('CrmLead', 0, 'create', 'failed', String(error));
+      console.error('[OdooService] Failed to create CRM lead:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Update job applicant in Odoo
    */
   async updateJobApplicant(

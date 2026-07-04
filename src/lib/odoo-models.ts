@@ -151,12 +151,27 @@ export interface OdooRpcError {
 }
 
 // Sync Configuration
+export interface OdooCrmLead {
+  id: number;
+  name: string;
+  contact_name: string;
+  email_from: string;
+  phone: string;
+  description: string;
+  stage_id: [number, string];
+  user_id: [number, string];
+  team_id: [number, string];
+  company_id: [number, string];
+  create_date: string;
+}
+
 export const ODOO_MODELS = {
   EMPLOYEE: 'hr.employee',
   JOB: 'hr.job',
   JOB_APPLICANT: 'hr.applicant',
   DEPARTMENT: 'hr.department',
   COMPANY: 'res.company',
+  CRM_LEAD: 'crm.lead',
 } as const;
 
 export const ODOO_FIELDS = {
@@ -224,5 +239,18 @@ export const ODOO_FIELDS = {
     'website',
     'logo',
     'currency_id',
+  ],
+  CRM_LEAD: [
+    'id',
+    'name',
+    'contact_name',
+    'email_from',
+    'phone',
+    'description',
+    'stage_id',
+    'user_id',
+    'team_id',
+    'company_id',
+    'create_date',
   ],
 } as const;
