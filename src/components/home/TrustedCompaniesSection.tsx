@@ -13,18 +13,9 @@ interface BadgeItem {
 }
 
 const awards: BadgeItem[] = [
-  { title: 'UAE Top Recruiter 2024',  subtitle: 'Gulf Business Awards',        level: 'gold',     variant: 'award' },
-  { title: 'MOHRE Licensed',          subtitle: 'Ministry of Human Resources', level: 'platinum', variant: 'award' },
-  { title: 'WPS Compliant',           subtitle: 'Wage Protection System',      level: 'gold',     variant: 'award' },
-  { title: 'ISO 9001:2024',           subtitle: 'Quality Management',          level: 'silver',   variant: 'award' },
-  { title: 'Best HR Consultancy',     subtitle: 'GCC Business Awards 2025',    level: 'gold',     variant: 'award' },
-  { title: 'KHDA Accredited',         subtitle: 'Dubai Knowledge Authority',   level: 'silver',   variant: 'award' },
-  { title: 'Great Place to Work UAE', subtitle: 'Workplace Excellence 2026',   level: 'gold',     variant: 'award' },
-  { title: 'Dubai Chamber Approved',  subtitle: 'Chamber of Commerce Member',  level: 'platinum', variant: 'award' },
-  { title: 'Excellence in Recruitment', subtitle: 'HR Summit Middle East',     level: 'gold',     variant: 'award' },
-  { title: 'Odoo Gold Partner',       subtitle: 'ERP Implementation',          level: 'gold',     variant: 'award' },
-  { title: 'Fastest Growing HR Firm', subtitle: 'SME Awards UAE 2025',         level: 'silver',   variant: 'award' },
-  { title: 'Tawteen Partner',         subtitle: 'UAE National Development',    level: 'bronze',   variant: 'award' },
+  { title: 'MOHRE Licensed',          subtitle: 'Ministry of Human Resources & Emiratisation', level: 'platinum', variant: 'award' },
+  { title: 'WPS Compliant',           subtitle: 'UAE Wage Protection System',                  level: 'gold',     variant: 'award' },
+  { title: 'Odoo Gold Partner',       subtitle: 'ERP Implementation & Consulting',                  level: 'gold',     variant: 'award' },
 ]
 
 // ─── Marquee track ────────────────────────────────────────────────────────────
@@ -197,7 +188,7 @@ export function TrustedCompaniesSection() {
             letterSpacing: '-0.02em',
           }}
         >
-          On Our Way to UAE&apos;s Top Recruiter
+          Trusted by UAE Employers
         </h2>
 
         <p
@@ -234,9 +225,9 @@ export function TrustedCompaniesSection() {
       <div className="mt-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
         <div className="flex items-center justify-center gap-8 sm:gap-14 flex-wrap">
           {[
-            { val: '12+',      label: 'Awards & Certifications' },
+            { val: '3',        label: 'Verified Certifications' },
             { val: '100%',     label: 'WPS & MOHRE Compliant' },
-            { val: 'Sprint to', label: 'Top UAE Recruiter' },
+            { val: 'Since',    label: '2020 Serving UAE' },
           ].map((item) => (
             <div key={item.val} className="text-center">
               <div
