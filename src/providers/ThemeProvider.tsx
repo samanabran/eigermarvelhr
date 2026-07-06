@@ -39,7 +39,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (t === 'light') {
       root.setAttribute('data-theme', 'light')
     } else {
-      root.removeAttribute('data-theme')
+      root.setAttribute('data-theme', 'dark')
     }
     localStorage.setItem(STORAGE_KEY, t)
   }, [])
@@ -106,7 +106,7 @@ function CurtainOverlay({
       if (nextTheme === 'light') {
         root.setAttribute('data-theme', 'light')
       } else {
-        root.removeAttribute('data-theme')
+        root.setAttribute('data-theme', 'dark')
       }
 
       if (prefersReduced) {
