@@ -102,14 +102,9 @@ function CurtainOverlay({
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     async function animate() {
-      const root = document.documentElement
-      if (nextTheme === 'light') {
-        root.setAttribute('data-theme', 'light')
-      } else {
-        root.setAttribute('data-theme', 'dark')
-      }
-
       if (prefersReduced) {
+        const root = document.documentElement
+        root.setAttribute('data-theme', nextTheme)
         onComplete(nextTheme)
         return
       }
@@ -124,6 +119,10 @@ function CurtainOverlay({
 
       const closePhase = gsap.timeline({
         onComplete: () => {
+          // Theme changes AFTER curtains are fully closed (no flash)
+          const root = document.documentElement
+          root.setAttribute('data-theme', nextTheme)
+
           const openPhase = gsap.timeline({
             onComplete: () => onComplete(nextTheme),
           })

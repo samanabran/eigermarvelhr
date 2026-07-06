@@ -22,6 +22,31 @@
   }
 
   :root {
+    /* Radix Colors: Dark slate palette (required by --color-neutral-N references below) */
+    --slate-1: #151718;
+    --slate-2: #1a1d1e;
+    --slate-3: #202425;
+    --slate-4: #26292b;
+    --slate-5: #2b2f31;
+    --slate-6: #313538;
+    --slate-7: #3a3f42;
+    --slate-8: #4c5155;
+    --slate-9: #697177;
+    --slate-10: #787f85;
+    --slate-11: #9ba1a6;
+    --slate-12: #ecedee;
+    --slate-a1: rgba(0,0,0,0);
+    --slate-a2: rgba(0,0,0,0);
+    --slate-a3: rgba(0,0,0,0);
+    --slate-a4: rgba(0,0,0,0);
+    --slate-a5: rgba(0,0,0,0);
+    --slate-a6: rgba(0,0,0,0);
+    --slate-a7: rgba(0,0,0,0);
+    --slate-a8: rgba(0,0,0,0);
+    --slate-a9: rgba(0,0,0,0);
+    --slate-a10: rgba(0,0,0,0);
+    --slate-a11: rgba(0,0,0,0);
+    --slate-a12: rgba(0,0,0,0);
     --tomato-contrast: #fff;
     --red-contrast: #fff;
     --ruby-contrast: #fff;
