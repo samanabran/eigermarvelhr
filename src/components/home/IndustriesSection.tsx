@@ -27,6 +27,7 @@ const industries = [
     ],
     icon: HardHat,
     gold: true,
+    heroSrc: '/images/industries/construction.jpg',
   },
   {
     id: 'hospitality',
@@ -45,6 +46,7 @@ const industries = [
     ],
     icon: ForkKnife,
     gold: false,
+    heroSrc: '/images/industries/hospitality.jpg',
   },
   {
     id: 'facilities',
@@ -63,6 +65,7 @@ const industries = [
     ],
     icon: Wrench,
     gold: false,
+    heroSrc: '/images/industries/mep.jpg',
   },
   {
     id: 'logistics',
@@ -81,6 +84,7 @@ const industries = [
     ],
     icon: Truck,
     gold: false,
+    heroSrc: '/images/industries/heavy-manpower.jpg',
   },
 ]
 
@@ -121,6 +125,31 @@ function IndustryCard({
 
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full p-7">
+        {/* Hero image banner */}
+        {industry.heroSrc && (
+          <div
+            className="relative -mx-7 -mt-7 mb-5 overflow-hidden"
+            style={{ height: 140 }}
+          >
+            <img
+              src={industry.heroSrc}
+              alt={`${industry.label} workforce`}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+            {/* Bottom fade into card surface */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  'linear-gradient(180deg, transparent 0%, transparent 35%, color-mix(in oklab, var(--color-background) 75%, transparent) 80%, var(--color-background) 100%)',
+              }}
+              aria-hidden="true"
+            />
+          </div>
+        )}
+
         {/* Header */}
         <div className="flex items-start justify-between mb-5">
           <div>
