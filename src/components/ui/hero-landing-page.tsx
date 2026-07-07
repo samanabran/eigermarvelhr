@@ -11,12 +11,12 @@ gsap.registerPlugin(ScrollTrigger)
 
 // ─── Gold Color Tokens ───────────────────────────────────────────────
 const GOLD = {
-  light: 'oklch(0.92 0.15 85)',
-  base: 'oklch(0.82 0.12 85)',
-  dark: 'oklch(0.72 0.09 85)',
-  deep: 'oklch(0.62 0.08 85)',
-  glow: 'rgba(214, 184, 92, 0.4)',
-  glowStrong: 'rgba(214, 184, 92, 0.7)',
+  light: 'var(--color-gold-100)',
+  base: 'var(--color-gold-300)',
+  dark: 'var(--color-gold-500)',
+  deep: 'var(--color-gold-600)',
+  glow: 'rgba(var(--gold-rgb), 0.4)',
+  glowStrong: 'rgba(var(--gold-rgb), 0.7)',
 }
 
 // ─── Animation Variants ──────────────────────────────────────────────
@@ -255,22 +255,22 @@ export function HeroLandingPage({
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen bg-[#0a0a0a] text-white overflow-hidden"
+      className="relative min-h-screen bg-background text-foreground overflow-hidden"
     >
       {/* Background layer */}
       <div className="absolute inset-0 hero-bg-parallax">
         {/* Base dark gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#0d0d0a] to-[#0a0a0a]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-background" />
 
         {/* Gold vignette overlays */}
-        <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-radial from-[oklch(0.82_0.12_85/0.08)] via-transparent to-transparent" />
-        <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-[oklch(0.72_0.09_85/0.06)] via-transparent to-transparent" />
+        <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-radial from-gold-300/10 via-transparent to-transparent" />
+        <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-gold-500/10 via-transparent to-transparent" />
 
         {/* Subtle grid overlay */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(rgba(214, 184, 92, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(214, 184, 92, 0.3) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(var(--gold-rgb), 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--gold-rgb), 0.3) 1px, transparent 1px)`,
             backgroundSize: '60px 60px',
           }}
         />
@@ -323,7 +323,7 @@ export function HeroLandingPage({
                 <Button
                   size="lg"
                   onClick={onCtaClick}
-                  className="group relative overflow-hidden bg-gradient-to-r from-[oklch(0.82_0.12_85)] via-[oklch(0.87_0.13_85)] to-[oklch(0.82_0.12_85)] text-black font-bold text-base px-8 py-6 h-auto rounded-lg shadow-[0_0_25px_rgba(214,184,92,0.3)] hover:shadow-[0_0_40px_rgba(214,184,92,0.5)] transition-all duration-300 hover:scale-105 border-none"
+                  className="group relative overflow-hidden bg-gradient-to-r from-gold-300 via-gold-200 to-gold-300 text-black font-bold text-base px-8 py-6 h-auto rounded-lg shadow-[0_0_25px_rgba(var(--gold-rgb),0.3)] hover:shadow-[0_0_40px_rgba(var(--gold-rgb),0.5)] transition-all duration-300 hover:scale-105 border-none"
                 >
                   {/* Shine sweep */}
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
@@ -337,7 +337,7 @@ export function HeroLandingPage({
                   size="lg"
                   variant="outline"
                   onClick={onSecondaryCtaClick}
-                  className="border-[oklch(0.82_0.12_85/0.5)] bg-transparent text-white hover:bg-[oklch(0.82_0.12_85/0.1)] hover:border-[oklch(0.87_0.13_85)] font-bold text-base px-8 py-6 h-auto rounded-lg transition-all duration-300 hover:scale-105"
+                  className="border-gold-300/50 bg-transparent text-white hover:bg-gold-300/10 hover:border-gold-200 font-bold text-base px-8 py-6 h-auto rounded-lg transition-all duration-300 hover:scale-105"
                 >
                   {secondaryCtaLabel}
                 </Button>
@@ -375,7 +375,7 @@ export function HeroLandingPage({
                   variants={statItemVariants}
                   className="text-center group"
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[oklch(0.82_0.12_85/0.1)] border border-[oklch(0.82_0.12_85/0.2)] text-[oklch(0.82_0.12_85)] mb-4 group-hover:bg-[oklch(0.82_0.12_85/0.2)] group-hover:border-[oklch(0.87_0.13_85/0.4)] transition-all duration-300">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold-300/10 border border-gold-300/20 text-gold-300 mb-4 group-hover:bg-gold-300/20 group-hover:border-gold-200/40 transition-all duration-300">
                     {stat.icon}
                   </div>
                   <div className="text-4xl sm:text-5xl font-light text-white mb-2 tracking-tight">
@@ -397,7 +397,7 @@ export function HeroLandingPage({
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <ChevronDown className="w-6 h-6 text-[oklch(0.82_0.12_85/0.5)]" />
+        <ChevronDown className="w-6 h-6 text-gold-300/50" />
       </motion.div>
     </section>
   )

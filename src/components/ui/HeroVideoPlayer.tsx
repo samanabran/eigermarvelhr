@@ -23,7 +23,7 @@ export function HeroVideoPlayer({
 
   return (
     <section
-      className={`relative w-full ${minHeight} overflow-hidden bg-black ${className}`}
+      className={`relative w-full ${minHeight} overflow-hidden bg-background ${className}`}
       aria-label="Eiger Marvel hero video"
     >
       <iframe
@@ -41,7 +41,7 @@ export function HeroVideoPlayer({
         className="absolute inset-0 pointer-events-none z-10"
         style={{
           background:
-            'linear-gradient(to top, rgba(7,8,15,0.92) 0%, rgba(7,8,15,0.55) 35%, rgba(7,8,15,0.25) 65%, transparent 100%)',
+            'linear-gradient(to top, color-mix(in srgb, var(--color-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-bg) 55%, transparent) 35%, color-mix(in srgb, var(--color-bg) 25%, transparent) 65%, transparent 100%)',
         }}
       />
 

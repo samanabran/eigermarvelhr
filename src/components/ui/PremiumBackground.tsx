@@ -16,8 +16,8 @@ const VARIANTS: Record<Variant, {
   default: {
     base: 'from-background via-background to-secondary',
     spots: [
-      { pos: '15% 8%', size: '60% 45%', opacity: 0.09, color: '184,145,44' },
-      { pos: '85% 75%', size: '55% 45%', opacity: 0.07, color: '184,145,44' },
+      { pos: '15% 8%', size: '60% 45%', opacity: 0.09, color: 'var(--gold-rgb)' },
+      { pos: '85% 75%', size: '55% 45%', opacity: 0.07, color: 'var(--gold-rgb)' },
       { pos: '50% 50%', size: '40% 30%', opacity: 0.04, color: '120,90,200' },
     ],
     gridOpacity: 0.04,
@@ -26,7 +26,7 @@ const VARIANTS: Record<Variant, {
   subtle: {
     base: 'from-background via-background to-secondary',
     spots: [
-      { pos: '50% 0%', size: '70% 35%', opacity: 0.06, color: '184,145,44' },
+      { pos: '50% 0%', size: '70% 35%', opacity: 0.06, color: 'var(--gold-rgb)' },
     ],
     gridOpacity: 0.025,
     grainOpacity: 0.03,
@@ -34,17 +34,17 @@ const VARIANTS: Record<Variant, {
   editorial: {
     base: 'from-background to-secondary',
     spots: [
-      { pos: '20% 15%', size: '55% 40%', opacity: 0.12, color: '184,145,44' },
-      { pos: '80% 60%', size: '50% 45%', opacity: 0.09, color: '184,145,44' },
+      { pos: '20% 15%', size: '55% 40%', opacity: 0.12, color: 'var(--gold-rgb)' },
+      { pos: '80% 60%', size: '50% 45%', opacity: 0.09, color: 'var(--gold-rgb)' },
       { pos: '50% 95%', size: '60% 30%', opacity: 0.05, color: '120,90,200' },
     ],
     gridOpacity: 0.06,
     grainOpacity: 0.05,
   },
   cinematic: {
-    base: 'from-[#0a0a0f] via-background to-[#0a0a0f]',
+    base: 'from-background via-background to-background',
     spots: [
-      { pos: '50% 30%', size: '80% 50%', opacity: 0.10, color: '184,145,44' },
+      { pos: '50% 30%', size: '80% 50%', opacity: 0.10, color: 'var(--gold-rgb)' },
       { pos: '20% 80%', size: '40% 35%', opacity: 0.06, color: '60,80,180' },
     ],
     gridOpacity: 0.03,
@@ -103,7 +103,7 @@ export function PremiumBackground({
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(to bottom, transparent 0%, transparent 70%, rgba(7,8,15,0.5) 100%)',
+            'linear-gradient(to bottom, transparent 0%, transparent 70%, color-mix(in srgb, var(--color-bg) 50%, transparent) 100%)',
         }}
       />
     </div>
