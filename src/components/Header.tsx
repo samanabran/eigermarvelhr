@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { List, X, User as UserIcon, SignOut, SunDim, MoonStars } from '@phosphor-icons/react'
 import { useTheme } from '@/providers/ThemeProvider'
 import type { User, CandidateProfile } from '@/lib/types'
-const logoIcon = 'https://res.cloudinary.com/dsl5fhclj/image/upload/v1769770778/krvcbd9clp1pfb8rbjxb.webp'
+import logoSrc from '@/assets/images/logo-icon.png'
 
 interface HeaderProps {
   onNavigate: (page: string) => void
@@ -54,7 +54,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
   }
 
   return (
-    <header className="bg-primary/98 backdrop-blur-md text-primary-foreground sticky top-0 z-50 shadow-lg border-b border-accent/20" role="banner">
+    <header className="bg-background/95 backdrop-blur-md text-foreground sticky top-0 z-50 shadow-sm border-b border-border" role="banner">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
               <button 
@@ -63,12 +63,12 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
               aria-label="Eiger Marvel - Exceed Your Expectations Home"
             >
               <img 
-                src={logoIcon} 
+                src={logoSrc} 
                 alt="Eiger Marvel Logo" 
-                className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl object-cover shadow-lg ring-1 ring-white/10 flex-shrink-0"
+                className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl object-cover shadow-sm ring-1 ring-border flex-shrink-0"
               />
               <div className="flex flex-col leading-tight min-w-0">
-                <span className="text-lg sm:text-2xl font-bold tracking-tight text-white drop-shadow-sm">Eiger Marvel</span>
+                <span className="text-lg sm:text-2xl font-bold tracking-tight text-foreground">Eiger Marvel</span>
                 <span className="text-xs sm:text-sm gradient-gold-shine font-semibold tracking-wider">Exceed Your Expectations</span>
               </div>
             </button>
@@ -81,7 +81,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
                   className={`text-xs lg:text-sm font-semibold transition-all duration-300 relative py-2 whitespace-nowrap ${
                     currentPage === item.value 
                       ? 'text-accent' 
-                      : 'text-primary-foreground/90 hover:text-accent'
+                      : 'text-muted-foreground hover:text-accent'
                   }`}
                 >
                   {item.label}
@@ -100,7 +100,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
           <div className="hidden md:flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <button
               onClick={toggle}
-              className="p-2 rounded-lg hover:bg-primary-foreground/10 transition-colors text-primary-foreground/70 hover:text-accent"
+              className="p-2 rounded-lg hover:bg-accent/10 transition-colors text-muted-foreground hover:text-accent"
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
@@ -126,7 +126,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
                   variant="ghost" 
                   size="sm"
                   onClick={handleLogout}
-                  className="text-primary-foreground hover:text-destructive hover:bg-destructive/10"
+                  className="text-muted-foreground hover:text-destructive hover:bg-destructive/10"
                 >
                   <SignOut className="h-4 w-4" />
                 </Button>
@@ -137,7 +137,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
                   variant="ghost" 
                   size="sm"
                   onClick={() => window.location.href = 'https://erp.eigermarvelhr.com/web/login'}
-                  className="text-primary-foreground hover:text-accent hover:bg-accent/10 font-semibold transition-all text-xs sm:text-sm whitespace-nowrap"
+                  className="text-muted-foreground hover:text-accent hover:bg-accent/10 font-semibold transition-all text-xs sm:text-sm whitespace-nowrap"
                 >
                   Login
                 </Button>
@@ -154,7 +154,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
           </div>
 
           <button
-            className="md:hidden hover:bg-primary-foreground/10 p-2 rounded-lg transition-colors flex-shrink-0"
+            className="md:hidden hover:bg-accent/10 p-2 rounded-lg transition-colors flex-shrink-0 text-muted-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen ? 'true' : 'false'}
@@ -164,7 +164,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-primary-foreground/20 py-4" role="navigation" aria-label="Mobile navigation">
+          <div className="md:hidden border-t border-border py-4" role="navigation" aria-label="Mobile navigation">
             <nav className="flex flex-col gap-3">
               {navItems.map(item => (
                 <button
@@ -176,7 +176,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
                   className={`text-left text-sm font-semibold py-2 px-4 rounded-lg transition-all break-words ${
                     currentPage === item.value 
                       ? 'bg-gradient-to-r from-accent to-accent/90 text-accent-foreground shadow-md' 
-                      : 'text-primary-foreground hover:bg-primary-foreground/10'
+                      : 'text-muted-foreground hover:bg-accent/10 hover:text-accent'
                   }`}
                 >
                   {item.label}
@@ -187,10 +187,10 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
                   )}
                 </button>
               ))}
-              <div className="flex flex-col gap-2 mt-2 pt-4 border-t border-primary-foreground/20">
+              <div className="flex flex-col gap-2 mt-2 pt-4 border-t border-border">
                 <button
                   onClick={toggle}
-                  className="flex items-center gap-3 px-4 py-2 text-sm font-semibold rounded-lg text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-2 text-sm font-semibold rounded-lg text-muted-foreground hover:bg-accent/10 hover:text-accent transition-colors"
                 >
                   {theme === 'dark' ? <SunDim size={18} weight="bold" /> : <MoonStars size={18} weight="bold" />}
                   {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
@@ -223,7 +223,7 @@ export function Header({ onNavigate, currentPage, onAuthClick, currentUser, cand
                       onClick={() => {
                         window.location.href = 'https://erp.eigermarvelhr.com/web/login'
                       }}
-                      className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
+                      className="border-border text-muted-foreground hover:bg-accent/10 hover:text-accent"
                     >
                       Login
                     </Button>
