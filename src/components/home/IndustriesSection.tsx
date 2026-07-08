@@ -84,7 +84,7 @@ const industries = [
     ],
     icon: Truck,
     gold: false,
-    heroSrc: '/images/industries/heavy-manpower.jpg',
+    heroSrc: '/images/industries/logistics.jpg',
   },
 ]
 

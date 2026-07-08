@@ -4,10 +4,8 @@ import { useRef, useEffect } from 'react'
 import { gsap } from '@/lib/gsap'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
-const TEAM_IMAGE =
-  'https://res.cloudinary.com/dsl5fhclj/image/upload/f_auto,q_auto,c_fill,g_auto:faces,ar_16:9/v1772907258/qgrjckaexnewfjjlnpif.png'
-const EXEC_IMAGE =
-  'https://res.cloudinary.com/dsl5fhclj/image/upload/f_auto,q_auto,c_fill,g_auto,ar_4:3,w_800/v1773034091/pmhd832m4b2qdfxg2rcf.jpg'
+const TEAM_IMAGE = '/images/about/consultants-meeting.jpg'
+const EXEC_IMAGE = '/images/about/team-execution.jpg'
 
 const highlights = [
   { stat: '50+', label: 'Workforce Experts' },
@@ -117,7 +115,7 @@ export function PremiumSection({ onUpgrade }: { onUpgrade?: () => void } = {}) {
             <div className="relative aspect-video">
               <img
                 src={TEAM_IMAGE}
-                alt="Eiger Marvel consultants meeting clients in Dubai"
+                alt="Eiger Marvel workforce solutions — warehouse and logistics operations across the UAE"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                 loading="lazy"
                 decoding="async"
@@ -156,7 +154,7 @@ export function PremiumSection({ onUpgrade }: { onUpgrade?: () => void } = {}) {
             >
               <img
                 src={EXEC_IMAGE}
-                alt="Eiger Marvel execution team delivering recruitment operations in Dubai"
+                alt="Operations specialist using tablet in a UAE warehouse"
                 className="w-full h-44 object-cover"
                 loading="lazy"
                 decoding="async"
